@@ -19,3 +19,19 @@
 - Build the multi-step `SpendForm` to capture user tool data.
 - Implement the `localStorage` persistence layer.
 - Build the `/api/audit` route to connect the frontend form to the audit engine.
+
+## Day 2 — 2026-05-21
+**Hours worked:** 3
+**What I did:** 
+- Built the `SpendForm` multi-step React component with local storage persistence.
+- Created `PRICING_DATA.md` compiling all our verified pricing points for grading.
+- Implemented core UI elements (Button, Card) using native tailwind + lucide-react.
+- Built the `src/app/audit/page.tsx` shell to house the form.
+- Built the `src/app/api/audit/route.ts` API route which connects the frontend form input to the deterministic audit engine and stores the result in Supabase.
+**What I learned:** 
+- Using `localStorage` with Next.js requires ensuring the component is mounted on the client before reading to avoid hydration mismatch errors.
+**Blockers / what I'm stuck on:** 
+- None today. The flow from form -> engine -> DB is solid.
+**Plan for tomorrow:** 
+- Build the audit results page to display the data beautifully.
+- Integrate the Gemini API for the personalized summary paragraph.
