@@ -21,7 +21,7 @@ export default function SpendForm() {
 
   // Load from localStorage on mount
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line
     setMounted(true);
     const saved = localStorage.getItem("spendlens_form");
     if (saved) {

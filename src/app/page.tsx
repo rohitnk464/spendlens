@@ -103,7 +103,7 @@ function AnimatedCounter({
 
     const numMatch = value.match(/[\d,]+/);
     if (!numMatch) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+      // eslint-disable-next-line
       setDisplay(value);
       return;
     }
