@@ -28,6 +28,7 @@
 - Implemented core UI elements (Button, Card) using native tailwind + lucide-react.
 - Built the `src/app/audit/page.tsx` shell to house the form.
 - Built the `src/app/api/audit/route.ts` API route which connects the frontend form input to the deterministic audit engine and stores the result in Supabase.
+- Debugged and fixed GitHub Actions CI pipeline (resolved strict Next.js linting errors, missing Radix UI dependencies, and updated `npm ci` to `npm install` for Node compatibility).
 **What I learned:** 
 - Using `localStorage` with Next.js requires ensuring the component is mounted on the client before reading to avoid hydration mismatch errors.
 **Blockers / what I'm stuck on:** 
