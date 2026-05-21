@@ -21,6 +21,7 @@ export default function SpendForm() {
 
   // Load from localStorage on mount
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const saved = localStorage.getItem("spendlens_form");
     if (saved) {
@@ -127,7 +128,7 @@ export default function SpendForm() {
 // ==========================================
 // STEP 1: Select Tools
 // ==========================================
-function Step1Tools({ state, updateState, onNext }: any) {
+function Step1Tools({ state, updateState, onNext }: { state: FormState; updateState: (updates: Partial<FormState>) => void; onNext: () => void }) {
   const allTools = getAllTools();
   
   const toggleTool = (toolId: AITool) => {
@@ -197,7 +198,7 @@ function Step1Tools({ state, updateState, onNext }: any) {
 // ==========================================
 // STEP 2: Configure Plans
 // ==========================================
-function Step2Plans({ state, updateState, onNext, onBack }: any) {
+function Step2Plans({ state, updateState, onNext, onBack }: { state: FormState; updateState: (updates: Partial<FormState>) => void; onNext: () => void; onBack: () => void }) {
   const updateTool = (index: number, updates: Partial<UserToolEntry>) => {
     const newTools = [...state.tools];
     newTools[index] = { ...newTools[index], ...updates };
@@ -225,7 +226,7 @@ function Step2Plans({ state, updateState, onNext, onBack }: any) {
     <Card className="animate-slide-up">
       <CardHeader>
         <CardTitle>Configure your subscriptions</CardTitle>
-        <CardDescription>Tell us which plans you're on and your approximate monthly spend.</CardDescription>
+        <CardDescription>Tell us which plans you&apos;re on and your approximate monthly spend.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6 mb-8">
@@ -304,7 +305,7 @@ function Step2Plans({ state, updateState, onNext, onBack }: any) {
 // ==========================================
 // STEP 3: Team Info
 // ==========================================
-function Step3Team({ state, updateState, onSubmit, onBack, isSubmitting }: any) {
+function Step3Team({ state, updateState, onSubmit, onBack, isSubmitting }: { state: FormState; updateState: (updates: Partial<FormState>) => void; onSubmit: () => void; onBack: () => void; isSubmitting: boolean }) {
   const useCases: { id: UseCase; label: string; desc: string }[] = [
     { id: "coding", label: "Software Engineering", desc: "Writing, reviewing, and shipping code." },
     { id: "writing", label: "Content & Marketing", desc: "Copywriting, blogs, emails, and PR." },

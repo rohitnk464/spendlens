@@ -10,7 +10,6 @@ import {
   TrendingDown,
   Users,
   FileText,
-  CheckCircle2,
   ChevronDown,
   Sparkles,
   DollarSign,
@@ -104,6 +103,7 @@ function AnimatedCounter({
 
     const numMatch = value.match(/[\d,]+/);
     if (!numMatch) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDisplay(value);
       return;
     }

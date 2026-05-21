@@ -51,10 +51,10 @@ export async function POST(req: Request) {
       data: auditResult,
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Audit API Error:", error);
     return NextResponse.json(
-      { success: false, error: error.message || "Internal server error" },
+      { success: false, error: (error as Error).message || "Internal server error" },
       { status: 500 }
     );
   }

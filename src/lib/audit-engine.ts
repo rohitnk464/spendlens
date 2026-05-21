@@ -1,4 +1,4 @@
-import { AuditInput, AuditResult, ToolAuditResult, AITool, RecommendationType, SavingsTier } from "@/types";
+import { AuditInput, AuditResult, ToolAuditResult, RecommendationType, SavingsTier } from "@/types";
 import { getToolPlans, getPlanById } from "./pricing-data";
 import { generateAuditId } from "./utils";
 
