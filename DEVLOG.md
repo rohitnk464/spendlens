@@ -36,3 +36,18 @@
 **Plan for tomorrow:** 
 - Build the audit results page to display the data beautifully.
 - Integrate the Gemini API for the personalized summary paragraph.
+
+## Day 4 — 2026-05-22
+**Hours worked:** 3
+**What I did:** 
+- Built the secure Audit Results page (`src/app/audit/[id]/page.tsx`) pulling data from Supabase.
+- Integrated Google Gemini API to generate personalized financial summaries (`route.ts` and `AISummary.tsx`).
+- Built Animated Hero and Tool Breakdown UI components.
+- Documented Gemini system prompts in `PROMPTS.md`.
+**What I learned:** 
+- Prompting Gemini 2.5 Flash is extremely fast, allowing us to generate personalized summaries dynamically without blocking page load.
+**Blockers / what I'm stuck on:** 
+- None. The API integration works flawlessly.
+**Plan for tomorrow:** 
+- Lead capture form to save audits to the database with user emails.
+- Resend integration for transactional emails.
