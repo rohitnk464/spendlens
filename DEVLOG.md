@@ -51,3 +51,20 @@
 **Plan for tomorrow:** 
 - Lead capture form to save audits to the database with user emails.
 - Resend integration for transactional emails.
+
+## Day 5 — 2026-05-23
+**Hours worked:** 2
+**What I did:** 
+- Built `LeadCaptureForm.tsx` to prompt users to enter their email at the bottom of their audit results.
+- Built `/api/lead/route.ts` which saves the email to the Supabase `leads` table and uses the Resend API to send a beautifully formatted transactional email containing a link to their report.
+- Implemented basic in-memory rate limiting and a hidden "honeypot" field in the form to prevent automated bot spam.
+- Added Next.js `generateMetadata` to dynamically generate Open Graph tags and Twitter Cards for the shareable URLs based on the exact dollar amount the user saved.
+- Built a functional client-side "Share Report" clipboard button.
+**What I learned:** 
+- Next.js dynamic metadata generation is powerful but requires awaiting the `params` object in Next 15+ before generating the tags.
+**Blockers / what I'm stuck on:** 
+- Need to configure the production domain in Resend later when deploying to Vercel, but for now testing via `onboarding@resend.dev` works locally.
+**Plan for tomorrow:** 
+- Deploy to Vercel!
+- Polish the UI with micro-interactions.
+- Run Lighthouse audits and fix any performance/accessibility issues.
