@@ -4,8 +4,56 @@ import { AuditResult } from "@/types";
 import ResultsHero from "@/components/audit/ResultsHero";
 import AISummary from "@/components/audit/AISummary";
 import ToolBreakdown from "@/components/audit/ToolBreakdown";
+import ShareButton from "@/components/audit/ShareButton";
 import Link from "next/link";
-import { ArrowLeft, Share2 } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import LeadCaptureForm from "@/components/audit/LeadCaptureForm";
+import type { Metadata } from "next";
+
+export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const params = await props.params;
+  const id = params.id;
+  
+  // Basic validation to prevent unnecessary DB queries
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  if (!uuidRegex.test(id)) {
+    return { title: "Audit Not Found" };
+  }
+
+  const supabase = await createServerClient();
+  const { data } = await supabase.from("audits").select("results").eq("id", id).single();
+  
+  if (!data) return { title: "Audit Not Found" };
+
+  const results: AuditResult = typeof data.results === 'string' ? JSON.parse(data.results) : data.results;
+  const savings = Math.floor(results.totalAnnualSavings).toLocaleString();
+
+  return {
+    title: `I saved $${savings} on AI tools using SpendLens!`,
+    description: "Audit your SaaS stack and discover cheaper, better AI alternatives.",
+    openGraph: {
+      title: `I saved $${savings} on AI tools using SpendLens!`,
+      description: "Audit your SaaS stack and discover cheaper, better AI alternatives.",
+      url: `https://spendlens.com/audit/${id}`,
+      siteName: "SpendLens",
+      images: [
+        {
+          url: "https://spendlens.com/og-image.png",
+          width: 1200,
+          height: 630,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `I saved $${savings} on AI tools using SpendLens!`,
+      description: "Audit your SaaS stack and discover cheaper, better AI alternatives.",
+      images: ["https://spendlens.com/og-image.png"],
+    },
+  };
+}
 
 export default async function AuditResultsPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -46,10 +94,7 @@ export default async function AuditResultsPage(props: { params: Promise<{ id: st
           Back to start
         </Link>
         
-        <button className="inline-flex items-center px-3 py-1.5 rounded-full bg-secondary text-secondary-foreground text-sm font-medium hover:bg-secondary/80 transition-colors">
-          <Share2 className="w-4 h-4 mr-2" />
-          Share Report
-        </button>
+        <ShareButton />
       </div>
 
       <ResultsHero 
@@ -63,6 +108,10 @@ export default async function AuditResultsPage(props: { params: Promise<{ id: st
 
       <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
         <ToolBreakdown tools={results.tools} />
+      </div>
+
+      <div className="mt-12 animate-slide-up" style={{ animationDelay: "0.3s" }}>
+        <LeadCaptureForm auditId={id} savingsTier={results.savingsTier} />
       </div>
 
       {/* CTA Footer for Credex */}
