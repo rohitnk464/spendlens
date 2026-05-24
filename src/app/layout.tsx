@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://spendlens.com'),
   title: {
     default: "SpendLens — AI Spend Audit Tool",
     template: "%s | SpendLens",
