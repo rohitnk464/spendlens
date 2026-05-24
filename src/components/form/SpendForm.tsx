@@ -91,14 +91,14 @@ export default function SpendForm() {
     <div className="w-full max-w-3xl mx-auto">
       {/* Progress Bar */}
       <div className="mb-8">
-        <div className="flex justify-between text-sm font-medium text-muted-foreground mb-2">
-          <span className={state.currentStep >= 1 ? "text-primary" : ""}>Select Tools</span>
-          <span className={state.currentStep >= 2 ? "text-primary" : ""}>Configure Plans</span>
-          <span className={state.currentStep >= 3 ? "text-primary" : ""}>Team Details</span>
+        <div className="flex justify-between text-xs sm:text-sm font-semibold tracking-wider uppercase text-muted-foreground mb-3 px-2">
+          <span className={state.currentStep >= 1 ? "text-primary transition-colors duration-300" : "transition-colors duration-300"}>Select Tools</span>
+          <span className={state.currentStep >= 2 ? "text-primary transition-colors duration-300" : "transition-colors duration-300"}>Configure Plans</span>
+          <span className={state.currentStep >= 3 ? "text-primary transition-colors duration-300" : "transition-colors duration-300"}>Team Details</span>
         </div>
-        <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
+        <div className="h-1.5 w-full bg-secondary/50 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-primary transition-all duration-500 ease-in-out"
+            className="h-full bg-gradient-to-r from-primary to-accent transition-all duration-700 ease-out"
             style={{ width: `${((state.currentStep) / 3) * 100}%` }}
           />
         </div>
@@ -153,10 +153,10 @@ function Step1Tools({ state, updateState, onNext }: { state: FormState; updateSt
   };
 
   return (
-    <Card className="animate-slide-up">
-      <CardHeader>
-        <CardTitle>What AI tools are you paying for?</CardTitle>
-        <CardDescription>Select all the tools your team currently uses.</CardDescription>
+    <Card className="animate-slide-up glass border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-2xl">
+      <CardHeader className="text-center pb-8 pt-10">
+        <CardTitle className="text-3xl font-bold tracking-tight">What AI tools are you paying for?</CardTitle>
+        <CardDescription className="text-base mt-2">Select all the tools your team currently uses.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -223,10 +223,10 @@ function Step2Plans({ state, updateState, onNext, onBack }: { state: FormState; 
   };
 
   return (
-    <Card className="animate-slide-up">
-      <CardHeader>
-        <CardTitle>Configure your subscriptions</CardTitle>
-        <CardDescription>Tell us which plans you&apos;re on and your approximate monthly spend.</CardDescription>
+    <Card className="animate-slide-up glass border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-2xl">
+      <CardHeader className="text-center pb-8 pt-10">
+        <CardTitle className="text-3xl font-bold tracking-tight">Configure your subscriptions</CardTitle>
+        <CardDescription className="text-base mt-2">Tell us which plans you&apos;re on and your approximate monthly spend.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6 mb-8">
@@ -314,12 +314,13 @@ function Step3Team({ state, updateState, onSubmit, onBack, isSubmitting }: { sta
   ];
 
   return (
-    <Card className="animate-slide-up border-primary/20 glow">
-      <CardHeader>
-        <CardTitle>Final details</CardTitle>
-        <CardDescription>This helps our engine identify the most cost-effective alternatives for your specific needs.</CardDescription>
+    <Card className="animate-slide-up glass border-primary/30 glow shadow-2xl relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 pointer-events-none" />
+      <CardHeader className="text-center pb-8 pt-10 relative z-10">
+        <CardTitle className="text-3xl font-bold tracking-tight">Final details</CardTitle>
+        <CardDescription className="text-base mt-2">This helps our engine identify the most cost-effective alternatives for your specific needs.</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="relative z-10">
         <div className="space-y-8 mb-8">
           {/* Team Size */}
           <div className="space-y-3">

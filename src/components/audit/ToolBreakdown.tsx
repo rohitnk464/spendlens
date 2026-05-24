@@ -35,10 +35,10 @@ export default function ToolBreakdown({ tools }: { tools: ToolAuditResult[] }) {
           return (
             <div 
               key={idx} 
-              className={`p-5 sm:p-6 rounded-2xl border transition-all ${
+              className={`p-5 sm:p-6 rounded-2xl border transition-all duration-300 ${
                 isOptimal 
-                  ? "bg-secondary/20 border-border/50" 
-                  : "bg-card border-primary/20 shadow-sm hover:shadow-md hover:border-primary/40"
+                  ? "bg-secondary/10 border-border/30 opacity-70" 
+                  : "glass border-primary/20 shadow-lg hover:shadow-primary/10 hover:-translate-y-1 hover:border-primary/40"
               }`}
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
@@ -54,8 +54,8 @@ export default function ToolBreakdown({ tools }: { tools: ToolAuditResult[] }) {
                   </div>
                 </div>
                 
-                <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap self-start sm:self-auto ${
-                  isOptimal ? "bg-secondary text-muted-foreground" : "bg-secondary text-foreground border border-border"
+                <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium whitespace-nowrap self-start sm:self-auto shadow-sm ${
+                  isOptimal ? "bg-secondary/50 text-muted-foreground" : "bg-primary/10 text-primary border border-primary/20"
                 }`}>
                   {getIcon(result.recommendation)}
                   {getLabel(result.recommendation)}
