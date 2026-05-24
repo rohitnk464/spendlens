@@ -1,505 +1,284 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   ArrowRight,
-  BarChart3,
   Shield,
   Zap,
   TrendingDown,
-  Users,
-  FileText,
-  ChevronDown,
   Sparkles,
-  DollarSign,
   Eye,
+  Lock,
 } from "lucide-react";
 
 const TOOLS = [
   { name: "Cursor", logo: "⚡" },
   { name: "ChatGPT", logo: "🤖" },
   { name: "Claude", logo: "🧠" },
-  { name: "GitHub Copilot", logo: "🐙" },
+  { name: "Copilot", logo: "🐙" },
   { name: "Gemini", logo: "✨" },
-  { name: "Windsurf", logo: "🏄" },
 ];
-
-const STATS = [
-  { value: "$2,400", label: "Avg. annual savings found", prefix: "" },
-  { value: "47%", label: "of teams overspend on AI", prefix: "" },
-  { value: "< 2min", label: "to complete audit", prefix: "" },
-];
-
-const STEPS = [
-  {
-    icon: FileText,
-    title: "Input Your Stack",
-    description:
-      "Tell us what AI tools you use, which plans, team size, and how much you pay.",
-  },
-  {
-    icon: BarChart3,
-    title: "Get Your Audit",
-    description:
-      "Our engine analyzes every subscription — plan fit, cheaper alternatives, and hidden savings.",
-  },
-  {
-    icon: TrendingDown,
-    title: "Save Money",
-    description:
-      "See exactly where to cut, switch, or downgrade — with dollar amounts and reasoning.",
-  },
-];
-
-const FAQS = [
-  {
-    q: "Is SpendLens really free?",
-    a: "Yes, completely free. No credit card, no login required. We show you the audit results before asking for anything.",
-  },
-  {
-    q: "How accurate are the savings estimates?",
-    a: "Very. Every price in our engine is pulled from official vendor pricing pages and verified weekly. We cite our sources — you can check every number.",
-  },
-  {
-    q: "What tools do you support?",
-    a: "Cursor, GitHub Copilot, Claude, ChatGPT, Anthropic API, OpenAI API, Gemini, and Windsurf — covering all major AI development and productivity tools.",
-  },
-  {
-    q: "How does Credex help me save even more?",
-    a: "Credex sells discounted AI infrastructure credits sourced from companies that overforecast. For high-savings audits, we can connect you with credits at 15–30% below retail.",
-  },
-  {
-    q: "Do you store my data?",
-    a: "Your audit is stored to generate a shareable link. We never share identifying details publicly — shared links show tools and savings only, never company names or emails.",
-  },
-];
-
-function AnimatedCounter({
-  value,
-  duration = 2000,
-}: {
-  value: string;
-  duration?: number;
-}) {
-  const [display, setDisplay] = useState(value);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.5 }
-    );
-
-    const el = document.getElementById(`counter-${value}`);
-    if (el) observer.observe(el);
-    return () => observer.disconnect();
-  }, [value]);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    const numMatch = value.match(/[\d,]+/);
-    if (!numMatch) {
-      // eslint-disable-next-line
-      setDisplay(value);
-      return;
-    }
-
-    const target = parseInt(numMatch[0].replace(/,/g, ""));
-    const steps = 40;
-    const stepDuration = duration / steps;
-    let current = 0;
-
-    const timer = setInterval(() => {
-      current += target / steps;
-      if (current >= target) {
-        clearInterval(timer);
-        setDisplay(value);
-      } else {
-        const formatted = value.replace(
-          numMatch[0],
-          Math.floor(current).toLocaleString()
-        );
-        setDisplay(formatted);
-      }
-    }, stepDuration);
-
-    return () => clearInterval(timer);
-  }, [isVisible, value, duration]);
-
-  return (
-    <span id={`counter-${value}`} className="tabular-nums">
-      {display}
-    </span>
-  );
-}
-
-function FAQItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <div className="border border-border rounded-xl overflow-hidden transition-all duration-300 hover:border-primary/30">
-      <button
-        onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 text-left cursor-pointer"
-        aria-expanded={open}
-      >
-        <span className="font-medium text-foreground pr-4">{q}</span>
-        <ChevronDown
-          className={`w-5 h-5 text-muted-foreground shrink-0 transition-transform duration-300 ${
-            open ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-      <div
-        className={`overflow-hidden transition-all duration-300 ${
-          open ? "max-h-40 pb-5" : "max-h-0"
-        }`}
-      >
-        <p className="px-5 text-muted-foreground leading-relaxed">{a}</p>
-      </div>
-    </div>
-  );
-}
 
 export default function HomePage() {
+  const { scrollYProgress } = useScroll();
+  useTransform(scrollYProgress, [0, 1], [0, -50]);
+
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-screen bg-black text-white overflow-hidden selection:bg-primary/30">
+      
+      {/* Background Gradients */}
+      <div className="fixed inset-0 grid-pattern opacity-30 z-0 pointer-events-none" />
+      <div className="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary/20 rounded-full blur-[150px] pointer-events-none z-0" />
+      <div className="fixed bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-accent/20 rounded-full blur-[150px] pointer-events-none z-0" />
+
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-              <Eye className="w-4 h-4 text-primary-foreground" />
+            <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center border border-white/10 group-hover:bg-primary/20 transition-all">
+              <Eye className="w-4 h-4 text-white" />
             </div>
-            <span className="text-lg font-bold tracking-tight">
-              Spend<span className="text-primary">Lens</span>
-            </span>
+            <span className="text-lg font-bold tracking-tight">SpendLens</span>
           </Link>
           <Link
             href="/audit"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black font-semibold text-sm hover:bg-white/90 transition-all hover:scale-105 active:scale-95"
           >
             Start Audit
-            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 grid-pattern" />
-        <div className="absolute inset-0 radial-gradient" />
+      <section className="relative pt-40 pb-20 px-6 z-10 flex flex-col items-center text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium mb-8"
+        >
+          <Sparkles className="w-4 h-4" />
+          <span>The #1 AI Spend Optimizer</span>
+        </motion.div>
 
-        {/* Floating orbs */}
-        <div className="absolute top-20 left-[10%] w-72 h-72 bg-primary/10 rounded-full blur-[100px] animate-float" />
-        <div
-          className="absolute bottom-20 right-[10%] w-96 h-96 bg-accent/10 rounded-full blur-[120px] animate-float"
-          style={{ animationDelay: "3s" }}
-        />
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tighter leading-[1.05] mb-6 max-w-5xl"
+        >
+          Stop burning cash on <span className="gradient-text">redundant AI</span>.
+        </motion.h1>
 
-        <div className="relative max-w-5xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-medium mb-8 animate-slide-up">
-            <Sparkles className="w-4 h-4" />
-            Free AI Spend Audit — No login required
-          </div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-lg sm:text-2xl text-zinc-400 max-w-2xl mx-auto mb-10 font-light"
+        >
+          Instantly audit your entire AI stack. Discover cheaper alternatives, right-size your plans, and save thousands in 60 seconds.
+        </motion.p>
 
-          {/* Headline */}
-          <h1
-            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6 animate-slide-up"
-            style={{ animationDelay: "0.1s" }}
-          >
-            Stop Overpaying for
-            <br />
-            <span className="gradient-text">AI Tools</span>
-          </h1>
-
-          {/* Subheadline */}
-          <p
-            className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-slide-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            Most teams waste 30–50% on AI subscriptions they don&apos;t need.
-            SpendLens audits your stack in 2 minutes — for free.
-          </p>
-
-          {/* CTA */}
-          <div
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-slide-up"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <Link
-              href="/audit"
-              className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-lg hover:bg-primary/90 transition-all hover:shadow-xl hover:shadow-primary/25 active:scale-[0.98] animate-pulse-glow"
-            >
-              <DollarSign className="w-5 h-5" />
-              Audit My AI Spend
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-            <span className="text-sm text-muted-foreground flex items-center gap-1.5">
-              <Shield className="w-4 h-4" />
-              No signup · No credit card · Takes 2 minutes
-            </span>
-          </div>
-
-          {/* Tool logos strip */}
-          <div
-            className="flex flex-wrap items-center justify-center gap-3 animate-slide-up"
-            style={{ animationDelay: "0.4s" }}
-          >
-            <span className="text-sm text-muted-foreground mr-2">
-              Supports:
-            </span>
-            {TOOLS.map((tool) => (
-              <div
-                key={tool.name}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/50 border border-border/50 text-sm"
-              >
-                <span>{tool.logo}</span>
-                <span className="text-muted-foreground">{tool.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Strip */}
-      <section className="relative py-12 border-y border-border/50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl sm:text-4xl font-bold gradient-text mb-1">
-                  <AnimatedCounter value={stat.value} />
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section id="how-it-works" className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              How It Works
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Three steps. Two minutes. Real savings.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {STEPS.map((step, i) => (
-              <div
-                key={step.title}
-                className="relative glass rounded-2xl p-8 group hover:border-primary/30 transition-all duration-300"
-              >
-                {/* Step number */}
-                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center">
-                  {i + 1}
-                </div>
-
-                <step.icon className="w-10 h-10 text-primary mb-5 transition-transform duration-300 group-hover:scale-110" />
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {step.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What You Get */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/30">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              What Your Audit Includes
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              Not just numbers — actionable intelligence for your AI budget.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {[
-              {
-                icon: TrendingDown,
-                title: "Per-Tool Savings Breakdown",
-                desc: "See exactly how much you can save on each tool — with specific plan recommendations.",
-              },
-              {
-                icon: Zap,
-                title: "Smarter Alternatives",
-                desc: "Discover cheaper tools that do the same job for your specific use case.",
-              },
-              {
-                icon: Users,
-                title: "Right-Sizing Analysis",
-                desc: "Find out if you're on a team plan when individual would work, or enterprise when team suffices.",
-              },
-              {
-                icon: Sparkles,
-                title: "AI-Powered Summary",
-                desc: "A personalized paragraph explaining your audit results in plain English.",
-              },
-              {
-                icon: FileText,
-                title: "Shareable Report",
-                desc: "Get a unique URL to share with your team or finance — no login needed to view.",
-              },
-              {
-                icon: Shield,
-                title: "Credex Credits Access",
-                desc: "For high-savings audits, unlock discounted AI credits through Credex at 15–30% off retail.",
-              },
-            ].map((feature) => (
-              <div
-                key={feature.title}
-                className="flex gap-4 p-5 rounded-xl border border-border/50 hover:border-primary/20 transition-colors duration-300 bg-card/50"
-              >
-                <div className="shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <feature.icon className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold mb-1">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {feature.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Social Proof */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-12">
-            Trusted by Engineering Teams
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                quote:
-                  "We were paying for Cursor Business for 4 people. SpendLens showed us Pro was enough — saved $960/year.",
-                name: "Alex K.",
-                role: "CTO, Series A startup",
-              },
-              {
-                quote:
-                  "Didn't realize we could switch from ChatGPT Enterprise to Team plan. That's $3,600/year we're getting back.",
-                name: "Priya M.",
-                role: "Engineering Manager",
-              },
-            ].map((testimonial) => (
-              <div
-                key={testimonial.name}
-                className="glass rounded-2xl p-6 text-left"
-              >
-                <p className="text-muted-foreground mb-4 italic leading-relaxed">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
-                    {testimonial.name[0]}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {testimonial.role}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-xs text-muted-foreground mt-6 italic">
-            * Testimonials are illustrative examples based on typical audit results.
-          </p>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section id="faq" className="py-24 px-4 sm:px-6 lg:px-8 bg-secondary/30">
-        <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <div className="space-y-3">
-            {FAQS.map((faq) => (
-              <FAQItem key={faq.q} q={faq.q} a={faq.a} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 radial-gradient" />
-        <div className="relative max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Ready to find out what you&apos;re{" "}
-            <span className="gradient-text">really</span> spending?
-          </h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-            Join hundreds of teams who&apos;ve already audited their AI stack.
-            Free, instant, no strings.
-          </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 w-full sm:w-auto"
+        >
           <Link
             href="/audit"
-            className="group inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-lg hover:bg-primary/90 transition-all hover:shadow-xl hover:shadow-primary/25 active:scale-[0.98]"
+            className="w-full sm:w-auto group inline-flex justify-center items-center gap-3 px-8 py-4 rounded-full bg-primary text-white font-semibold text-lg hover:bg-primary/90 transition-all hover:shadow-[0_0_40px_-10px_rgba(79,70,229,0.5)] active:scale-95"
           >
-            Start My Free Audit
+            Audit My Stack
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </Link>
+          <div className="flex items-center gap-2 text-sm text-zinc-500">
+            <Lock className="w-4 h-4" /> No credit card required.
+          </div>
+        </motion.div>
+
+        {/* The "App Mockup" Hero Graphic */}
+        <motion.div
+          initial={{ opacity: 0, y: 100, rotateX: 10 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{ duration: 1.2, delay: 0.4, type: "spring", bounce: 0.4 }}
+          style={{ perspective: "1000px" }}
+          className="w-full max-w-5xl mx-auto"
+        >
+          <div className="glass rounded-2xl border border-white/10 overflow-hidden shadow-2xl bg-black/40 backdrop-blur-3xl">
+            <div className="h-12 border-b border-white/10 flex items-center px-4 gap-2 bg-white/5">
+              <div className="w-3 h-3 rounded-full bg-red-500/80" />
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <div className="w-3 h-3 rounded-full bg-green-500/80" />
+              <div className="mx-auto text-xs font-medium text-zinc-500">spendlens.com/audit/results</div>
+            </div>
+            <div className="p-8 sm:p-12 flex flex-col items-center">
+              <div className="text-zinc-500 font-medium mb-2 uppercase tracking-widest text-sm">Projected Annual Savings</div>
+              <div className="text-6xl sm:text-8xl font-bold tracking-tighter text-white mb-8">$2,400</div>
+              
+              <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">🤖</span>
+                    <div>
+                      <div className="font-semibold">ChatGPT Enterprise</div>
+                      <div className="text-xs text-zinc-500">Switch to Team Plan</div>
+                    </div>
+                  </div>
+                  <div className="text-green-400 font-semibold">-$1,200</div>
+                </div>
+                <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex justify-between items-center">
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">⚡</span>
+                    <div>
+                      <div className="font-semibold">Cursor Business</div>
+                      <div className="text-xs text-zinc-500">Downgrade to Pro</div>
+                    </div>
+                  </div>
+                  <div className="text-green-400 font-semibold">-$960</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Integrations Strip */}
+      <section className="py-12 border-y border-white/5 bg-white/[0.02] z-10">
+        <div className="max-w-7xl mx-auto px-6 overflow-hidden">
+          <p className="text-center text-sm font-medium text-zinc-500 mb-6 uppercase tracking-widest">
+            Analyzing pricing for top developer tools
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-8 opacity-70">
+            {TOOLS.map((tool, i) => (
+              <motion.div 
+                key={tool.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5"
+              >
+                <span className="text-xl">{tool.logo}</span>
+                <span className="font-medium">{tool.name}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bento Box Features */}
+      <section className="py-32 px-6 z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-20">
+            <h2 className="text-4xl sm:text-6xl font-bold tracking-tighter mb-6">
+              Everything you need to <br/>
+              <span className="text-zinc-500">optimize your burn rate.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+            {/* Large Feature 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="md:col-span-2 glass rounded-3xl p-8 border border-white/10 flex flex-col justify-between group hover:border-primary/50 transition-colors"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-6 text-primary">
+                  <TrendingDown className="w-6 h-6" />
+                </div>
+                <h3 className="text-3xl font-bold mb-2">Deterministic Math</h3>
+                <p className="text-zinc-400 text-lg max-w-md">Our engine pulls exact pricing from official API docs and SaaS tiers to calculate true overlaps.</p>
+              </div>
+            </motion.div>
+
+            {/* Square Feature 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              viewport={{ once: true }}
+              className="glass rounded-3xl p-8 border border-white/10 flex flex-col justify-between group hover:border-accent/50 transition-colors"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mb-6 text-accent">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Instant Results</h3>
+                <p className="text-zinc-400">No sales calls. Fill out the 3-step form and get your customized dashboard instantly.</p>
+              </div>
+            </motion.div>
+
+            {/* Square Feature 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              viewport={{ once: true }}
+              className="glass rounded-3xl p-8 border border-white/10 flex flex-col justify-between group hover:border-green-500/50 transition-colors"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mb-6 text-green-400">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Private & Secure</h3>
+                <p className="text-zinc-400">We don&apos;t ask for your company name or connect to your bank accounts.</p>
+              </div>
+            </motion.div>
+
+            {/* Large Feature 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              viewport={{ once: true }}
+              className="md:col-span-2 glass rounded-3xl p-8 border border-white/10 flex flex-col justify-between group hover:border-primary/50 transition-colors relative overflow-hidden"
+            >
+              <div className="absolute right-0 bottom-0 w-64 h-64 bg-primary/20 blur-[80px] rounded-full pointer-events-none" />
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mb-6 text-primary">
+                  <Sparkles className="w-6 h-6" />
+                </div>
+                <h3 className="text-3xl font-bold mb-2">Powered by Google Gemini</h3>
+                <p className="text-zinc-400 text-lg max-w-md">Every audit receives a custom-generated executive summary analyzing exactly why you should switch tools.</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-32 px-6 z-10 border-t border-white/5 relative">
+        <div className="absolute inset-0 bg-primary/5" />
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <h2 className="text-5xl sm:text-7xl font-bold tracking-tighter mb-8">
+            Ready to stop burning runway?
+          </h2>
+          <Link
+            href="/audit"
+            className="inline-flex justify-center items-center gap-3 px-10 py-5 rounded-full bg-white text-black font-bold text-xl hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95"
+          >
+            Start Free Audit
+            <ArrowRight className="w-6 h-6" />
           </Link>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-border/50">
+      <footer className="py-12 px-6 border-t border-white/10 z-10 bg-black">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
-              <Eye className="w-3 h-3 text-primary-foreground" />
+            <div className="w-6 h-6 rounded-md bg-white flex items-center justify-center">
+              <Eye className="w-3 h-3 text-black" />
             </div>
-            <span className="text-sm font-medium">
-              Spend<span className="text-primary">Lens</span>
-            </span>
-            <span className="text-xs text-muted-foreground">
-              by{" "}
-              <a
-                href="https://credex.rocks"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-primary transition-colors"
-              >
-                Credex
-              </a>
-            </span>
+            <span className="text-sm font-bold tracking-tight">SpendLens</span>
           </div>
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span>© {new Date().getFullYear()} Credex</span>
-          </div>
+          <p className="text-sm text-zinc-500">
+            © {new Date().getFullYear()} Credex. All rights reserved.
+          </p>
         </div>
       </footer>
     </main>
