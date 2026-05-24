@@ -6,7 +6,7 @@ import AISummary from "@/components/audit/AISummary";
 import ToolBreakdown from "@/components/audit/ToolBreakdown";
 import ShareButton from "@/components/audit/ShareButton";
 import Link from "next/link";
-import { ArrowLeft, Eye } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import LeadCaptureForm from "@/components/audit/LeadCaptureForm";
 import type { Metadata } from "next";
