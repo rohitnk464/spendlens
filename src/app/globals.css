@@ -29,32 +29,61 @@
 }
 
 :root {
-  /* Premium Modern Dark Theme - True Black Edition */
-  --background: #000000;
-  --foreground: #ffffff;
+  /* Premium Clean Light Theme (Google Style) */
+  --background: #ffffff;
+  --foreground: #111827; /* Very dark gray */
 
-  --primary: #4f46e5; /* Indigo 600 */
+  --primary: #1a73e8; /* Google Blue */
   --primary-foreground: #ffffff;
 
-  --secondary: #111111;
-  --secondary-foreground: #a1a1aa;
+  --secondary: #f3f4f6; /* Soft gray */
+  --secondary-foreground: #4b5563;
 
-  --muted: #0a0a0a;
-  --muted-foreground: #71717a;
+  --muted: #f9fafb;
+  --muted-foreground: #6b7280;
 
-  --accent: #8b5cf6; /* Violet 500 */
+  --accent: #1a73e8;
   --accent-foreground: #ffffff;
 
-  --destructive: #ef4444;
+  --destructive: #d93025; /* Google Red */
 
-  --border: #1a1a1a;
-  --ring: #4f46e5;
+  --border: #e5e7eb;
+  --ring: #1a73e8;
 
-  --card: #050505;
-  --card-foreground: #ffffff;
+  --card: #ffffff;
+  --card-foreground: #111827;
 
-  --success: #10b981;
-  --warning: #f59e0b;
+  --success: #188038; /* Google Green */
+  --warning: #f29900; /* Google Yellow */
+}
+
+.dark {
+  /* Google Dark Theme */
+  --background: #202124;
+  --foreground: #e8eaed;
+
+  --primary: #8ab4f8; /* Google Dark Blue */
+  --primary-foreground: #202124;
+
+  --secondary: #303134;
+  --secondary-foreground: #9aa0a6;
+
+  --muted: #303134;
+  --muted-foreground: #9aa0a6;
+
+  --accent: #8ab4f8;
+  --accent-foreground: #202124;
+
+  --destructive: #f28b82;
+
+  --border: #3c4043;
+  --ring: #8ab4f8;
+
+  --card: #202124;
+  --card-foreground: #e8eaed;
+
+  --success: #81c995;
+  --warning: #fdd663;
 }
 
 /* Smooth scrolling */
@@ -93,7 +122,7 @@ body {
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 50%, #d946ef 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -110,7 +139,7 @@ body {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(135deg, #4f46e5, #8b5cf6, #d946ef);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -119,16 +148,26 @@ body {
 
 /* Glass morphism card */
 .glass {
-  background: rgba(10, 10, 10, 0.4);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.dark .glass {
+  background: rgba(32, 33, 36, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Glow effect */
 .glow {
-  box-shadow: 0 0 60px -15px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+.dark .glow {
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
 }
 
 /* Floating animation */
@@ -142,8 +181,8 @@ body {
 
 /* Pulse glow */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px -5px rgba(99, 102, 241, 0.3); }
-  50% { box-shadow: 0 0 40px -5px rgba(99, 102, 241, 0.5); }
+  0%, 100% { box-shadow: 0 4px 20px -5px rgba(26, 115, 232, 0.3); }
+  50% { box-shadow: 0 8px 30px -5px rgba(26, 115, 232, 0.5); }
 }
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
@@ -176,16 +215,22 @@ body {
 /* Grid background pattern */
 .grid-pattern {
   background-image:
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark .grid-pattern {
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
 }
 
 /* Radial gradient background */
 .radial-gradient {
   background: radial-gradient(
     ellipse 80% 50% at 50% -20%,
-    rgba(79, 70, 229, 0.15),
+    rgba(26, 115, 232, 0.08),
     transparent
   );
 }

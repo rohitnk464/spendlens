@@ -1,6 +1,7 @@
 import SpendForm from "@/components/form/SpendForm";
 import Link from "next/link";
 import { ArrowLeft, Eye } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const metadata = {
   title: "Start Audit",
@@ -20,11 +21,14 @@ export default function AuditPage() {
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Home
           </Link>
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
-              <Eye className="w-3 h-3 text-primary-foreground" />
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <div className="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
+                <Eye className="w-3 h-3 text-primary-foreground" />
+              </div>
+              <span className="text-sm font-bold tracking-tight">SpendLens</span>
             </div>
-            <span className="text-sm font-bold tracking-tight">SpendLens</span>
           </div>
         </header>
 

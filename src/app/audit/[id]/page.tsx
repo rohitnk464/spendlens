@@ -6,7 +6,8 @@ import AISummary from "@/components/audit/AISummary";
 import ToolBreakdown from "@/components/audit/ToolBreakdown";
 import ShareButton from "@/components/audit/ShareButton";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Eye } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import LeadCaptureForm from "@/components/audit/LeadCaptureForm";
 import type { Metadata } from "next";
 
@@ -88,13 +89,16 @@ export default async function AuditResultsPage(props: { params: Promise<{ id: st
       <div className="flex items-center justify-between mb-8 animate-fade-in">
         <Link 
           href="/" 
-          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
           Back to start
         </Link>
         
-        <ShareButton />
+        <div className="flex items-center gap-4">
+          <ThemeToggle />
+          <ShareButton />
+        </div>
       </div>
 
       <ResultsHero 

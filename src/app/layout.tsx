@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Outfit, Roboto_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -59,10 +60,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${robotoMono.variable} h-full antialiased dark`}
+      className={`${outfit.variable} ${robotoMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        {children}
+      <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
