@@ -122,11 +122,57 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen bg-background text-foreground overflow-hidden selection:bg-primary/30">
+    <main className="flex flex-col min-h-screen bg-background text-foreground overflow-hidden selection:bg-primary/30 relative">
       
       {/* Premium Ambient Background Gradients */}
       <div className="fixed inset-0 grid-pattern opacity-[0.14] z-0 pointer-events-none" />
       <div className="absolute inset-x-0 top-0 h-[700px] bg-gradient-to-b from-transparent to-background pointer-events-none z-0" />
+
+      {/* 3D Floating Background Assets */}
+      <motion.div 
+        animate={{ 
+          y: [0, -18, 0],
+          rotate: [0, 8, 0]
+        }}
+        transition={{ 
+          duration: 9, 
+          repeat: Infinity,
+          ease: "easeInOut" 
+        }}
+        className="absolute left-[3%] top-[20%] w-32 sm:w-44 h-auto opacity-[0.15] dark:opacity-[0.25] pointer-events-none z-0 hidden lg:block"
+      >
+        <img src="/bg_trend.png" alt="Savings Trend 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
+      </motion.div>
+
+      <motion.div 
+        animate={{ 
+          y: [0, 20, 0],
+          rotate: [0, -10, 0]
+        }}
+        transition={{ 
+          duration: 10, 
+          repeat: Infinity,
+          ease: "easeInOut" 
+        }}
+        className="absolute right-[3%] top-[25%] w-32 sm:w-44 h-auto opacity-[0.15] dark:opacity-[0.25] pointer-events-none z-0 hidden lg:block"
+      >
+        <img src="/bg_shield.png" alt="Security Shield 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
+      </motion.div>
+
+      <motion.div 
+        animate={{ 
+          y: [0, -15, 0],
+          rotate: [0, 6, 0]
+        }}
+        transition={{ 
+          duration: 11, 
+          repeat: Infinity,
+          ease: "easeInOut" 
+        }}
+        className="absolute left-[2%] top-[55%] w-32 sm:w-40 h-auto opacity-[0.12] dark:opacity-[0.20] pointer-events-none z-0 hidden lg:block"
+      >
+        <img src="/bg_coins.png" alt="Reclaimed Spend Coins 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
+      </motion.div>
 
       {/* Premium Floating Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/40 backdrop-blur-md">
@@ -176,7 +222,7 @@ export default function HomePage() {
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           className="text-lg sm:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 font-light leading-relaxed"
         >
-          Instantly audit your entire AI software stack. Discover cheaper alternatives, right-size team subscriptions, and <span className="text-foreground dark:text-white font-semibold">reclaim your runway</span> in 30 seconds.
+          Instantly audit your entire AI software stack. Discover cheaper alternatives, right-size team subscriptions, and <span className="text-primary font-semibold">reclaim your runway</span> in 30 seconds.
         </motion.p>
 
         <motion.div
