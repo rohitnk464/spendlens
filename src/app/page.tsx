@@ -131,7 +131,7 @@ export default function HomePage() {
             <ThemeToggle />
             <Link
               href="/audit"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary-hover text-white font-semibold text-sm hover:opacity-95 shadow-md shadow-primary/10 hover:shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-white font-semibold text-sm hover:opacity-95 shadow-md shadow-primary/10 hover:shadow-primary/20 hover:scale-105 active:scale-95 transition-all"
             >
               Start Free Audit
             </Link>
