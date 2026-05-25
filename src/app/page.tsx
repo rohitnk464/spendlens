@@ -139,7 +139,7 @@ export default function HomePage() {
           repeat: Infinity,
           ease: "easeInOut" 
         }}
-        className="absolute left-[2%] sm:left-[4%] top-[15%] sm:top-[20%] w-20 sm:w-36 md:w-44 h-auto opacity-[0.14] dark:opacity-[0.24] pointer-events-none z-0 block"
+        className="absolute left-[2%] sm:left-[4%] top-[15%] sm:top-[20%] w-20 sm:w-36 md:w-44 h-auto opacity-[0.14] dark:opacity-[0.24] pointer-events-none z-10 block"
       >
         <img src="/bg_trend.png" alt="Savings Trend 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
       </motion.div>
@@ -154,7 +154,7 @@ export default function HomePage() {
           repeat: Infinity,
           ease: "easeInOut" 
         }}
-        className="absolute right-[2%] sm:right-[4%] top-[20%] sm:top-[25%] w-20 sm:w-36 md:w-44 h-auto opacity-[0.14] dark:opacity-[0.24] pointer-events-none z-0 block"
+        className="absolute right-[2%] sm:right-[4%] top-[20%] sm:top-[25%] w-20 sm:w-36 md:w-44 h-auto opacity-[0.14] dark:opacity-[0.24] pointer-events-none z-10 block"
       >
         <img src="/bg_shield.png" alt="Security Shield 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
       </motion.div>
@@ -169,7 +169,7 @@ export default function HomePage() {
           repeat: Infinity,
           ease: "easeInOut" 
         }}
-        className="absolute left-[2%] sm:left-[3%] top-[45%] sm:top-[50%] w-18 sm:w-32 md:w-40 h-auto opacity-[0.10] dark:opacity-[0.18] pointer-events-none z-0 block"
+        className="absolute left-[2%] sm:left-[3%] top-[45%] sm:top-[50%] w-18 sm:w-32 md:w-40 h-auto opacity-[0.10] dark:opacity-[0.18] pointer-events-none z-10 block"
       >
         <img src="/bg_coins.png" alt="Reclaimed Spend Coins 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
       </motion.div>
@@ -196,7 +196,7 @@ export default function HomePage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-24 px-6 z-10 flex flex-col items-center text-center">
+      <section className="relative pt-40 pb-24 px-6 z-20 flex flex-col items-center text-center">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
