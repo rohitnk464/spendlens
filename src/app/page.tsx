@@ -125,7 +125,8 @@ export default function HomePage() {
     <main className="flex flex-col min-h-screen bg-background text-foreground overflow-hidden selection:bg-primary/30">
       
       {/* Premium Ambient Background Gradients */}
-      <div className="fixed inset-0 grid-pattern opacity-[0.18] z-0 pointer-events-none" />
+      <div className="fixed inset-0 grid-pattern opacity-[0.14] z-0 pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-[700px] bg-gradient-to-b from-transparent to-background pointer-events-none z-0" />
 
       {/* Premium Floating Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/40 backdrop-blur-md">
@@ -154,9 +155,9 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-sm font-semibold mb-8 backdrop-blur-sm"
+          className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-8 backdrop-blur-sm shadow-sm"
         >
-          <Sparkles className="w-4 h-4 text-accent animate-pulse" />
+          <Sparkles className="w-4 h-4 text-primary animate-pulse" />
           <span>The #1 AI Spend Optimizer</span>
         </motion.div>
 
@@ -164,9 +165,9 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight leading-[1.05] mb-6 max-w-5xl"
+          className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight leading-[1.05] mb-6 max-w-5xl text-foreground"
         >
-          Stop burning cash on <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">redundant AI tools</span>.
+          Stop burning cash on <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#6366f1] to-[#8b5cf6] dark:from-[#8ab4f8] dark:via-[#c084fc] dark:to-[#f472b6]">redundant AI tools</span>.
         </motion.h1>
 
         <motion.p
@@ -175,7 +176,7 @@ export default function HomePage() {
           transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
           className="text-lg sm:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 font-light leading-relaxed"
         >
-          Instantly audit your entire AI software stack. Discover cheaper alternatives, right-size team subscriptions, and reclaim your runway in 30 seconds.
+          Instantly audit your entire AI software stack. Discover cheaper alternatives, right-size team subscriptions, and <span className="text-foreground dark:text-white font-semibold">reclaim your runway</span> in 30 seconds.
         </motion.p>
 
         <motion.div
@@ -186,7 +187,7 @@ export default function HomePage() {
         >
           <Link
             href="/audit"
-            className="w-full sm:w-auto group inline-flex justify-center items-center gap-3.5 px-9 py-4.5 rounded-full bg-foreground text-background font-bold text-lg hover:opacity-90 transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:hover:shadow-[0_8px_30px_rgba(255,255,255,0.08)] hover:scale-105 active:scale-95"
+            className="w-full sm:w-auto group inline-flex justify-center items-center gap-3.5 px-9 py-4.5 rounded-full bg-foreground text-background font-bold text-lg hover:opacity-95 shadow-md shadow-foreground/5 hover:scale-105 active:scale-95 transition-all duration-300 border border-border"
           >
             Audit My Stack
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
