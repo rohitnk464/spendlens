@@ -13,7 +13,6 @@ export default function AuditPage() {
     <main className="min-h-screen bg-background relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0 grid-pattern opacity-50" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <header className="flex items-center justify-between mb-12">

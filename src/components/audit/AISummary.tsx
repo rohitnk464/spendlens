@@ -43,8 +43,6 @@ export default function AISummary({
 
   return (
     <div className="relative glass rounded-2xl p-6 sm:p-8 mb-8 border border-primary/20 overflow-hidden group">
-      {/* Background glow */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] -mr-20 -mt-20 transition-all duration-500 group-hover:bg-primary/10" />
       
       <div className="relative z-10 flex flex-col sm:flex-row gap-6 items-start">
         <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20 shadow-inner">

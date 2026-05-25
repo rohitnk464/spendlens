@@ -117,8 +117,6 @@ export default function HomePage() {
       
       {/* Premium Ambient Background Gradients */}
       <div className="fixed inset-0 grid-pattern opacity-[0.18] z-0 pointer-events-none" />
-      <div className="fixed top-[-25%] left-[-15%] w-[60%] h-[60%] bg-gradient-to-br from-primary/15 via-primary/5 to-transparent rounded-full blur-[160px] pointer-events-none z-0" />
-      <div className="fixed bottom-[-25%] right-[-15%] w-[60%] h-[60%] bg-gradient-to-tl from-accent/15 via-accent/5 to-transparent rounded-full blur-[160px] pointer-events-none z-0" />
 
       {/* Premium Floating Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/40 backdrop-blur-md">
@@ -306,7 +304,6 @@ export default function HomePage() {
               transition={{ duration: 0.2 }}
               className="md:col-span-2 glass rounded-3xl p-8 sm:p-10 flex flex-col justify-between group hover:border-primary/30 transition-all border border-border/50 shadow-sm relative overflow-hidden"
             >
-              <div className="absolute right-[-10%] top-[-10%] w-60 h-60 bg-primary/5 rounded-full blur-[80px] pointer-events-none" />
               <div>
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 text-primary border border-primary/10">
                   <TrendingDown className="w-6 h-6" />
@@ -358,7 +355,6 @@ export default function HomePage() {
               transition={{ duration: 0.2 }}
               className="md:col-span-2 glass rounded-3xl p-8 sm:p-10 flex flex-col justify-between group hover:border-accent/30 transition-all border border-border/50 shadow-sm relative overflow-hidden"
             >
-              <div className="absolute left-[-10%] bottom-[-10%] w-60 h-60 bg-accent/5 rounded-full blur-[80px] pointer-events-none" />
               <div>
                 <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 text-accent border border-accent/10">
                   <Sparkles className="w-6 h-6" />
@@ -464,8 +460,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Conversion Block */}
-      <section className="py-32 px-6 z-10 border-t border-border/40 relative overflow-hidden bg-primary/5">
-        <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 via-accent/5 to-transparent pointer-events-none" />
+      <section className="py-32 px-6 z-10 border-t border-border/40 relative overflow-hidden bg-secondary/15">
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <h2 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 text-foreground leading-none">
             Ready to stop burning runway?
