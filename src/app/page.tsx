@@ -204,63 +204,44 @@ export default function HomePage() {
 
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center relative z-10">
           
-          {/* LEFT COLUMN: Catchy Value Prop & Badge */}
+          {/* LEFT COLUMN: Catchy Value Prop & Badges */}
           <div className="lg:col-span-7 flex flex-col items-start text-left relative z-20">
             
-            {/* Context Floating Card A */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: [0, 1, 1], scale: [0.8, 1, 1], y: [0, -6, 0] }}
-              transition={{ 
-                duration: 7, 
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-                delay: 0.3
-              }}
-              className="absolute -top-14 -left-6 hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl border border-border/70 bg-card/75 backdrop-blur-md shadow-lg shadow-black/5 hover:border-primary/30 transition-all pointer-events-none"
-            >
-              <div className="w-8 h-8 rounded-xl bg-destructive/15 flex items-center justify-center text-destructive">
-                <TrendingDown className="w-4 h-4" />
-              </div>
-              <div className="text-left">
-                <div className="text-[9px] uppercase font-bold text-muted-foreground tracking-wider">Active Waste</div>
-                <div className="text-xs font-extrabold text-foreground">-$320 / month</div>
-              </div>
-            </motion.div>
+            {/* Elegant Responsive Badges Row (Replaces messy drifting absolute cards) */}
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              {/* Badge 1: #1 AI Spend Optimizer */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary/20 bg-primary/10 dark:bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm cursor-default hover:border-primary/40 transition-colors"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" />
+                <span>#1 AI Spend Optimizer</span>
+              </motion.div>
 
-            {/* Context Floating Card B */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: [0, 1, 1], scale: [0.8, 1, 1], y: [0, 8, 0] }}
-              transition={{ 
-                duration: 8, 
-                repeat: Infinity,
-                repeatType: "reverse",
-                ease: "easeInOut",
-                delay: 0.8
-              }}
-              className="absolute bottom-4 -left-12 hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl border border-border/70 bg-card/75 backdrop-blur-md shadow-lg shadow-black/5 hover:border-success/30 transition-all pointer-events-none"
-            >
-              <div className="w-8 h-8 rounded-xl bg-success/15 flex items-center justify-center text-success">
-                <Check className="w-4 h-4" />
-              </div>
-              <div className="text-left">
-                <div className="text-[9px] uppercase font-bold text-muted-foreground tracking-wider">Credex Discount</div>
-                <div className="text-xs font-extrabold text-foreground">-25% Off Seats</div>
-              </div>
-            </motion.div>
+              {/* Badge 2: Waste Detected Alert */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-destructive/25 bg-destructive/10 dark:bg-destructive/5 text-destructive text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm cursor-default hover:border-destructive/40 transition-colors"
+              >
+                <TrendingDown className="w-3.5 h-3.5 text-destructive animate-bounce" />
+                <span>Waste Detected: -$320/mo</span>
+              </motion.div>
 
-            {/* Badge pill */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 dark:bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-sm cursor-default hover:border-primary/40 transition-colors"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" />
-              <span>#1 AI Spend Optimizer</span>
-            </motion.div>
+              {/* Badge 3: Credex Active Discount */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-success/25 bg-success/10 dark:bg-success/5 text-success text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm cursor-default hover:border-success/40 transition-colors"
+              >
+                <Zap className="w-3.5 h-3.5 text-success animate-pulse" />
+                <span>Credex: -25% Off</span>
+              </motion.div>
+            </div>
 
             {/* Bold Headline */}
             <motion.h1
@@ -316,7 +297,7 @@ export default function HomePage() {
             </motion.div>
           </div>
 
-          {/* RIGHT COLUMN: Interactive 3D Spend Cockpit */}
+          {/* RIGHT COLUMN: Organized 3D Spend Cockpit Dashboard */}
           <div className="lg:col-span-5 relative w-full flex justify-center items-center lg:pl-6 min-h-[480px] lg:min-h-0 z-20">
             
             {/* Ambient visual glowing spheres */}
@@ -324,48 +305,33 @@ export default function HomePage() {
             <div className="absolute bottom-[15%] right-[10%] w-60 h-60 rounded-full bg-pink-500/10 dark:bg-pink-500/5 blur-[70px] pointer-events-none z-0 animate-pulse" />
             <div className="absolute top-[40%] right-[30%] w-52 h-52 rounded-full bg-blue-500/10 dark:bg-blue-500/5 blur-[60px] pointer-events-none z-0" />
 
-            {/* Orbiting Tool Circles */}
+            {/* Symmetrical 4-Corner Floating Framework */}
+            
+            {/* ↗ Top-Right Corner Orbit: ChatGPT Pro */}
             <motion.div
-              animate={{ y: [0, -10, 0], x: [0, 4, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-4 left-[8%] z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-primary/30 transition-colors"
+              animate={{ y: [0, -8, 0], x: [0, 4, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-6 -right-6 z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-primary/30 transition-colors"
             >
               <span className="text-base">🤖</span>
               <span>ChatGPT Pro</span>
             </motion.div>
 
+            {/* ↙ Bottom-Left Corner Orbit: Gemini Pro */}
             <motion.div
-              animate={{ y: [0, 11, 0], x: [0, -5, 0] }}
+              animate={{ y: [0, 8, 0], x: [0, -4, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -bottom-6 right-[5%] z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-success/30 transition-colors"
-            >
-              <span className="text-base">⚡</span>
-              <span>Cursor Teams</span>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [0, -9, 0], x: [0, -7, 0] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              className="absolute top-[35%] -right-10 z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-accent/30 transition-colors"
-            >
-              <span className="text-base">🧠</span>
-              <span>Claude Pro</span>
-            </motion.div>
-
-            <motion.div
-              animate={{ y: [0, 9, 0], x: [0, 7, 0] }}
-              transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-              className="absolute top-[40%] -left-12 z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-primary/30 transition-colors"
+              className="absolute -bottom-6 -left-6 z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-success/30 transition-colors"
             >
               <span className="text-base">✨</span>
               <span>Gemini Pro</span>
             </motion.div>
 
-            {/* Overlapping Float Card 1: Cursor downgrade option */}
+            {/* ↖ Top-Left Corner Card: Cursor Downgrade Option */}
             <motion.div
-              animate={{ y: [0, -6, 0], rotate: [0, -1, 0] }}
+              animate={{ y: [0, -6, 0], rotate: [0, -0.5, 0] }}
               transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-12 -left-6 z-40 hidden md:flex items-center gap-3 px-4.5 py-3 rounded-2xl border border-border/80 bg-card/90 dark:bg-card/95 backdrop-blur-md shadow-2xl hover:border-primary/40 transition-colors cursor-default"
+              className="absolute -top-10 -left-6 z-40 hidden md:flex items-center gap-3 px-4.5 py-3 rounded-2xl border border-border/80 bg-card/90 dark:bg-card/95 backdrop-blur-md shadow-2xl hover:border-primary/40 transition-colors cursor-default"
             >
               <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-xl">⚡</div>
               <div className="text-left">
@@ -374,11 +340,11 @@ export default function HomePage() {
               </div>
             </motion.div>
 
-            {/* Overlapping Float Card 2: Credex optimization indicator */}
+            {/* ↘ Bottom-Right Corner Card: Credex Optimization Indicator */}
             <motion.div
-              animate={{ y: [0, 8, 0], rotate: [0, 1, 0] }}
+              animate={{ y: [0, 6, 0], rotate: [0, 0.5, 0] }}
               transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -bottom-8 -right-4 z-40 hidden md:flex items-center gap-3 px-4.5 py-3 rounded-2xl border border-border/80 bg-card/90 dark:bg-card/95 backdrop-blur-md shadow-2xl hover:border-success/45 transition-colors cursor-default shadow-neon-emerald"
+              className="absolute -bottom-8 -right-6 z-40 hidden md:flex items-center gap-3 px-4.5 py-3 rounded-2xl border border-border/80 bg-card/90 dark:bg-card/95 backdrop-blur-md shadow-2xl hover:border-success/45 transition-colors cursor-default shadow-neon-emerald"
             >
               <div className="w-9 h-9 rounded-xl bg-success/15 flex items-center justify-center text-success animate-pulse">
                 <Check className="w-5 h-5" />
