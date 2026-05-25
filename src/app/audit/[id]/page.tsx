@@ -15,9 +15,9 @@ export async function generateMetadata(props: { params: Promise<{ id: string }> 
   const params = await props.params;
   const id = params.id;
   
-  // Basic validation to prevent unnecessary DB queries
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-  if (!uuidRegex.test(id)) {
+  // Basic validation - nanoid(12) format, alphanumeric + _ -
+  const validIdRegex = /^[a-zA-Z0-9_-]{8,20}$/;
+  if (!validIdRegex.test(id)) {
     return { title: "Audit Not Found" };
   }
 
@@ -59,9 +59,9 @@ export default async function AuditResultsPage(props: { params: Promise<{ id: st
   const params = await props.params;
   const { id } = params;
 
-  // UUID regex check to prevent malformed queries
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-  if (!uuidRegex.test(id)) {
+  // Basic validation - nanoid(12) format, alphanumeric + _ -
+  const validIdRegex = /^[a-zA-Z0-9_-]{8,20}$/;
+  if (!validIdRegex.test(id)) {
     notFound();
   }
 
