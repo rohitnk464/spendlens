@@ -13,10 +13,10 @@ import {
   Lock,
   ChevronDown,
   Building,
-  User,
-  GraduationCap,
-  MessageSquare,
   Sparkle,
+  Star,
+  Check,
+  Quote,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -36,8 +36,11 @@ const TESTIMONIALS = [
     role: "Co-Founder",
     company: "Nistula Hospitality",
     credential: "IIM Ahmedabad Alumnus",
-    avatarColor: "bg-primary/20 text-primary border-primary/20",
+    avatarColor: "bg-gradient-to-tr from-primary/10 to-primary/30 text-primary border-primary/25 shadow-sm shadow-primary/5",
     badge: "Hospitality Startup",
+    stars: 5,
+    verified: true,
+    tools: ["Cursor", "Copilot", "Claude"],
   },
   {
     quote: "As an operations agency, we run heavy SEO automations on Claude and OpenAI APIs. SpendLens flagged our massive token costs and recommended Anthropic Prompt Caching and OpenAI Batch runs, saving us $2,640/year!",
@@ -45,8 +48,11 @@ const TESTIMONIALS = [
     role: "Digital Operations Lead",
     company: "Accrete Globus",
     credential: "Automation Expert",
-    avatarColor: "bg-accent/20 text-accent border-accent/20",
+    avatarColor: "bg-gradient-to-tr from-accent/10 to-accent/30 text-accent border-accent/25 shadow-sm shadow-accent/5",
     badge: "SEO & Ops Agency",
+    stars: 5,
+    verified: true,
+    tools: ["Claude API", "OpenAI API"],
   },
   {
     quote: "Our Java full-stack team had Cursor, Copilot, and ChatGPT Pro seats spread out. SpendLens showed that standardizing on Copilot seats saved us $60/month while fully maintaining IntelliJ IDE capabilities.",
@@ -54,8 +60,11 @@ const TESTIMONIALS = [
     role: "Associate Software Engineer",
     company: "Empower",
     credential: "Full Stack Developer",
-    avatarColor: "bg-success/20 text-success border-success/20",
+    avatarColor: "bg-gradient-to-tr from-success/10 to-success/30 text-success border-success/25 shadow-sm shadow-success/5",
     badge: "Enterprise Software",
+    stars: 5,
+    verified: true,
+    tools: ["Cursor", "Copilot", "ChatGPT"],
   },
 ];
 
@@ -397,36 +406,66 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {TESTIMONIALS.map((t, idx) => (
-              <div 
+              <motion.div 
                 key={idx}
-                className="p-8 rounded-3xl border border-border/50 bg-card/40 backdrop-blur-md flex flex-col justify-between shadow-sm hover:border-primary/20 hover:scale-[1.01] transition-all relative overflow-hidden"
+                whileHover={{ y: -8, scale: 1.015 }}
+                transition={{ duration: 0.3 }}
+                className="p-8 rounded-3xl border border-border/50 bg-card/45 backdrop-blur-md flex flex-col justify-between shadow-sm hover:border-primary/20 transition-all relative overflow-hidden pointer-events-auto"
               >
-                <div className="absolute right-5 top-5 opacity-[0.08]">
-                  <MessageSquare className="w-14 h-14" />
+                <div className="absolute right-6 top-6 opacity-[0.06] text-foreground pointer-events-none">
+                  <Quote className="w-12 h-12" />
                 </div>
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-foreground/5 text-foreground/80 text-xs font-bold mb-6">
-                    <Sparkle className="w-3 h-3 text-accent" />
-                    <span>{t.badge}</span>
+                  {/* Card Header: Category Badge & Stars */}
+                  <div className="flex items-center justify-between gap-2 mb-6">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-foreground/5 text-foreground/80 text-[10px] font-bold">
+                      <Sparkle className="w-3 h-3 text-accent" />
+                      <span>{t.badge}</span>
+                    </div>
+                    <div className="flex gap-0.5 text-amber-500">
+                      {Array.from({ length: t.stars }).map((_, i) => (
+                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                      ))}
+                    </div>
                   </div>
-                  <p className="text-foreground/95 italic text-sm sm:text-base leading-relaxed mb-8">
+
+                  {/* Testimonial Quote */}
+                  <p className="text-foreground/90 italic text-sm sm:text-base leading-relaxed mb-6 font-light">
                     &ldquo;{t.quote}&rdquo;
                   </p>
+
+                  {/* Audited Tool Badges */}
+                  <div className="flex flex-wrap items-center gap-2 mb-8">
+                    <span className="text-[9px] uppercase font-bold text-muted-foreground/80 tracking-wider">Audited Stack:</span>
+                    {t.tools.map((tool) => (
+                      <span key={tool} className="text-[10px] font-semibold px-2.5 py-0.5 rounded bg-muted/65 border border-border/60 text-muted-foreground">{tool}</span>
+                    ))}
+                  </div>
                 </div>
                 
+                {/* Author Info & Verified Tag */}
                 <div className="flex items-center gap-3.5 border-t border-border/50 pt-5 mt-auto">
                   <div className={`w-11 h-11 rounded-full flex items-center justify-center font-bold text-sm border font-sans ${t.avatarColor}`}>
                     {t.name.split(" ").map(n => n[0]).join("")}
                   </div>
                   <div className="text-left">
-                    <h4 className="font-bold text-foreground text-sm tracking-wide">{t.name}</h4>
-                    <div className="text-xs text-muted-foreground font-medium mt-0.5">{t.role}</div>
-                    <div className="text-[10px] text-primary font-bold uppercase tracking-wider mt-1 flex items-center gap-1">
-                      <Building className="w-2.5 h-2.5" /> {t.company}
+                    <h4 className="font-bold text-foreground text-sm tracking-wide flex items-center gap-1.5">
+                      {t.name}
+                      <div className="w-4 h-4 rounded-full bg-success/15 border border-success/20 flex items-center justify-center text-[9px] text-success shadow-inner" title="Verified Audit">
+                        <Check className="w-2.5 h-2.5" />
+                      </div>
+                    </h4>
+                    <div className="text-xs text-muted-foreground font-medium mt-0.5 flex flex-wrap items-center gap-1">
+                      <span>{t.role}</span>
+                      <span className="text-muted-foreground/30 font-light text-[10px]">•</span>
+                      <span className="text-primary text-[10px] font-bold tracking-tight">{t.credential}</span>
+                    </div>
+                    <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider mt-1.5 flex items-center gap-1">
+                      <Building className="w-2.5 h-2.5 text-muted-foreground/75" /> {t.company}
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
