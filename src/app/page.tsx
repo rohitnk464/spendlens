@@ -95,10 +95,10 @@ export default function HomePage() {
   const [savingsCount, setSavingsCount] = useState(0);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  // Smooth count-up animation for Hero Mockup
+  // Smooth count-up animation for Hero Mockup (representing $9,840 annual savings)
   useEffect(() => {
     let start = 0;
-    const end = 2430;
+    const end = 9840;
     const duration = 2000; // 2 seconds
     const incrementTime = 30;
     const totalSteps = Math.ceil(duration / incrementTime);
@@ -195,119 +195,413 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-40 pb-24 px-6 z-20 flex flex-col items-center text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-8 backdrop-blur-sm shadow-sm"
-        >
-          <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-          <span>The #1 AI Spend Optimizer</span>
-        </motion.div>
+      {/* Futuristic Hero Section Redesign */}
+      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-36 px-6 z-20 overflow-visible">
+        {/* Soft atmospheric gradients */}
+        <div className="absolute inset-0 grid-pattern opacity-[0.06] dark:opacity-[0.11] z-0 pointer-events-none" />
+        <div className="absolute top-[10%] left-[20%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full bg-primary/10 dark:bg-primary/5 blur-[110px] pointer-events-none z-0" />
+        <div className="absolute bottom-[20%] right-[10%] w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] rounded-full bg-accent/8 dark:bg-accent/5 blur-[130px] pointer-events-none z-0 animate-pulse-glow" />
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
-          className="text-5xl sm:text-7xl md:text-[5.5rem] font-bold tracking-tight leading-[1.05] mb-6 max-w-5xl text-foreground"
-        >
-          Stop burning cash on <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#6366f1] to-[#8b5cf6] dark:from-[#8ab4f8] dark:via-[#c084fc] dark:to-[#f472b6]">redundant AI tools</span>.
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-          className="text-lg sm:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 font-light leading-relaxed"
-        >
-          Instantly audit your entire AI software stack. Discover cheaper alternatives, right-size team subscriptions, and <span className="text-primary font-semibold">reclaim your runway</span> in 30 seconds.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-5.5 mb-20 w-full sm:w-auto"
-        >
-          <Link
-            href="/audit"
-            className="w-full sm:w-auto group inline-flex justify-center items-center gap-3.5 px-9 py-4.5 rounded-full bg-foreground text-background font-bold text-lg hover:opacity-95 shadow-md shadow-foreground/5 hover:scale-105 active:scale-95 transition-all duration-300 border border-border"
-          >
-            Audit My Stack
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
-            <Lock className="w-4 h-4 text-success" /> No credit card or Plaid link required.
-          </div>
-        </motion.div>
-
-        {/* Dynamic Mockup Graphic with live counting numbers & 4K Visualization */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.0, delay: 0.4, type: "spring", stiffness: 60 }}
-          className="w-full max-w-5xl mx-auto px-2"
-        >
-          <div className="glass rounded-2xl border border-border shadow-2xl bg-card/45 backdrop-blur-2xl overflow-hidden hover:border-primary/20 transition-colors duration-500">
-            <div className="h-12 border-b border-border/80 flex items-center px-5 gap-2 bg-muted/30">
-              <div className="w-3.5 h-3.5 rounded-full bg-destructive/60" />
-              <div className="w-3.5 h-3.5 rounded-full bg-warning/60" />
-              <div className="w-3.5 h-3.5 rounded-full bg-success/60" />
-              <div className="mx-auto text-xs font-semibold text-muted-foreground tracking-wide font-mono">spendlens.com/audit/results</div>
-            </div>
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 items-center relative z-10">
+          
+          {/* LEFT COLUMN: Catchy Value Prop & Badge */}
+          <div className="lg:col-span-7 flex flex-col items-start text-left relative z-20">
             
-            <div className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
-              {/* Column 1: Savings Counter & Recommendation Cards */}
-              <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left">
-                <div className="text-muted-foreground font-semibold mb-2 uppercase tracking-widest text-xs">Projected Annual Savings</div>
-                <motion.div className="text-6xl sm:text-[4.8rem] font-bold tracking-tight text-foreground mb-8 flex items-center font-mono">
-                  $<span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">{savingsCount.toLocaleString()}</span>
-                </motion.div>
-                
-                <div className="w-full grid grid-cols-1 gap-4">
-                  <div className="p-5 rounded-2xl bg-muted/20 border border-border/60 flex justify-between items-center shadow-inner hover:scale-[1.02] transition-transform">
-                    <div className="flex items-center gap-4">
-                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-xl">🤖</div>
-                      <div className="text-left">
-                        <div className="font-bold text-foreground text-sm sm:text-base">ChatGPT Enterprise</div>
-                        <div className="text-xs text-muted-foreground font-medium mt-0.5">Switch to ChatGPT Team</div>
-                      </div>
-                    </div>
-                    <div className="text-success font-bold text-base sm:text-lg">-$1,470</div>
-                  </div>
+            {/* Context Floating Card A */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: [0, 1, 1], scale: [0.8, 1, 1], y: [0, -6, 0] }}
+              transition={{ 
+                duration: 7, 
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+                delay: 0.3
+              }}
+              className="absolute -top-14 -left-6 hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl border border-border/70 bg-card/75 backdrop-blur-md shadow-lg shadow-black/5 hover:border-primary/30 transition-all pointer-events-none"
+            >
+              <div className="w-8 h-8 rounded-xl bg-destructive/15 flex items-center justify-center text-destructive">
+                <TrendingDown className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <div className="text-[9px] uppercase font-bold text-muted-foreground tracking-wider">Active Waste</div>
+                <div className="text-xs font-extrabold text-foreground">-$320 / month</div>
+              </div>
+            </motion.div>
 
-                  <div className="p-5 rounded-2xl bg-muted/20 border border-border/60 flex justify-between items-center shadow-inner hover:scale-[1.02] transition-transform">
-                    <div className="flex items-center gap-4">
-                      <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-xl">⚡</div>
-                      <div className="text-left">
-                        <div className="font-bold text-foreground text-sm sm:text-base">Cursor Business</div>
-                        <div className="text-xs text-muted-foreground font-medium mt-0.5">Downgrade to Cursor Pro</div>
-                      </div>
+            {/* Context Floating Card B */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: [0, 1, 1], scale: [0.8, 1, 1], y: [0, 8, 0] }}
+              transition={{ 
+                duration: 8, 
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+                delay: 0.8
+              }}
+              className="absolute bottom-4 -left-12 hidden xl:flex items-center gap-3 px-4 py-2.5 rounded-2xl border border-border/70 bg-card/75 backdrop-blur-md shadow-lg shadow-black/5 hover:border-success/30 transition-all pointer-events-none"
+            >
+              <div className="w-8 h-8 rounded-xl bg-success/15 flex items-center justify-center text-success">
+                <Check className="w-4 h-4" />
+              </div>
+              <div className="text-left">
+                <div className="text-[9px] uppercase font-bold text-muted-foreground tracking-wider">Credex Discount</div>
+                <div className="text-xs font-extrabold text-foreground">-25% Off Seats</div>
+              </div>
+            </motion.div>
+
+            {/* Badge pill */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 dark:bg-primary/5 text-primary text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm shadow-sm cursor-default hover:border-primary/40 transition-colors"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" />
+              <span>#1 AI Spend Optimizer</span>
+            </motion.div>
+
+            {/* Bold Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6 text-foreground"
+            >
+              Stop burning cash on <br />
+              <span className="relative inline-block mt-2 pb-1.5">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#1a73e8] via-[#6366f1] to-[#8b5cf6] dark:from-[#8ab4f8] dark:via-[#c084fc] dark:to-[#f472b6]">
+                  redundant AI tools.
+                </span>
+                <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-gradient-to-r from-primary/0 via-primary/40 to-accent/0 rounded-full blur-[1px]" />
+              </span>
+            </motion.h1>
+
+            {/* High-contrast description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 max-w-xl font-light leading-relaxed"
+            >
+              Instantly audit your entire AI software stack. Discover cheaper alternatives, right-size team subscriptions, and <span className="text-primary dark:text-primary font-semibold">reclaim your runway</span> in 30 seconds.
+            </motion.p>
+
+            {/* Main CTA button and trust badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-5 w-full sm:w-auto"
+            >
+              <Link
+                href="/audit"
+                className="relative group rounded-full p-[1.5px] overflow-hidden focus:outline-none focus:ring-2 focus:ring-primary/45 transition-all duration-300 w-full sm:w-auto active:scale-95 shadow-lg shadow-primary/10 hover:shadow-primary/25"
+              >
+                {/* Custom glowing border background */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-success rounded-full opacity-85 group-hover:opacity-100 transition-opacity duration-300 animate-pulse-glow" />
+                <div className="relative px-8 py-4 rounded-full bg-black text-white font-bold text-base sm:text-lg flex justify-center items-center gap-3 transition-colors group-hover:bg-neutral-950">
+                  Audit My Stack
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+              
+              <div className="flex items-center justify-center sm:justify-start gap-2 text-xs sm:text-sm text-muted-foreground font-semibold py-2 sm:py-0">
+                <div className="w-7 h-7 rounded-full bg-success/15 dark:bg-success/10 border border-success/20 flex items-center justify-center text-success shadow-inner animate-pulse">
+                  <Lock className="w-3.5 h-3.5" />
+                </div>
+                <span>No credit card or Plaid required</span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* RIGHT COLUMN: Interactive 3D Spend Cockpit */}
+          <div className="lg:col-span-5 relative w-full flex justify-center items-center lg:pl-6 min-h-[480px] lg:min-h-0 z-20">
+            
+            {/* Ambient visual glowing spheres */}
+            <div className="absolute top-[15%] left-[10%] w-64 h-64 rounded-full bg-violet-500/10 dark:bg-violet-500/5 blur-[80px] pointer-events-none z-0" />
+            <div className="absolute bottom-[15%] right-[10%] w-60 h-60 rounded-full bg-pink-500/10 dark:bg-pink-500/5 blur-[70px] pointer-events-none z-0 animate-pulse" />
+            <div className="absolute top-[40%] right-[30%] w-52 h-52 rounded-full bg-blue-500/10 dark:bg-blue-500/5 blur-[60px] pointer-events-none z-0" />
+
+            {/* Orbiting Tool Circles */}
+            <motion.div
+              animate={{ y: [0, -10, 0], x: [0, 4, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-4 left-[8%] z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-primary/30 transition-colors"
+            >
+              <span className="text-base">🤖</span>
+              <span>ChatGPT Pro</span>
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [0, 11, 0], x: [0, -5, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute -bottom-6 right-[5%] z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-success/30 transition-colors"
+            >
+              <span className="text-base">⚡</span>
+              <span>Cursor Teams</span>
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [0, -9, 0], x: [0, -7, 0] }}
+              transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute top-[35%] -right-10 z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-accent/30 transition-colors"
+            >
+              <span className="text-base">🧠</span>
+              <span>Claude Pro</span>
+            </motion.div>
+
+            <motion.div
+              animate={{ y: [0, 9, 0], x: [0, 7, 0] }}
+              transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
+              className="absolute top-[40%] -left-12 z-30 px-3.5 py-1.5 rounded-full border border-border bg-card/85 dark:bg-card/90 backdrop-blur-md shadow-lg flex items-center gap-2 text-xs font-semibold hover:border-primary/30 transition-colors"
+            >
+              <span className="text-base">✨</span>
+              <span>Gemini Pro</span>
+            </motion.div>
+
+            {/* Overlapping Float Card 1: Cursor downgrade option */}
+            <motion.div
+              animate={{ y: [0, -6, 0], rotate: [0, -1, 0] }}
+              transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -top-12 -left-6 z-40 hidden md:flex items-center gap-3 px-4.5 py-3 rounded-2xl border border-border/80 bg-card/90 dark:bg-card/95 backdrop-blur-md shadow-2xl hover:border-primary/40 transition-colors cursor-default"
+            >
+              <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-xl">⚡</div>
+              <div className="text-left">
+                <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-wide">Cursor Switch</div>
+                <div className="text-xs font-extrabold text-foreground">Downgrade to Pro (-$100)</div>
+              </div>
+            </motion.div>
+
+            {/* Overlapping Float Card 2: Credex optimization indicator */}
+            <motion.div
+              animate={{ y: [0, 8, 0], rotate: [0, 1, 0] }}
+              transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+              className="absolute -bottom-8 -right-4 z-40 hidden md:flex items-center gap-3 px-4.5 py-3 rounded-2xl border border-border/80 bg-card/90 dark:bg-card/95 backdrop-blur-md shadow-2xl hover:border-success/45 transition-colors cursor-default shadow-neon-emerald"
+            >
+              <div className="w-9 h-9 rounded-xl bg-success/15 flex items-center justify-center text-success animate-pulse">
+                <Check className="w-5 h-5" />
+              </div>
+              <div className="text-left">
+                <div className="text-[10px] font-bold text-success uppercase tracking-wide">Credex Activated</div>
+                <div className="text-xs font-extrabold text-foreground">Saved $2,430/yr via credits</div>
+              </div>
+            </motion.div>
+
+            {/* Main dashboard cocktail wrapper */}
+            <motion.div
+              initial={{ opacity: 0, y: 55, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.3, type: "spring", stiffness: 50 }}
+              className="w-full relative z-10 glass rounded-3xl border border-border/75 shadow-2xl bg-card/25 dark:bg-card/35 backdrop-blur-3xl overflow-hidden hover:border-primary/30 transition-all duration-500 shadow-neon-blue pointer-events-auto"
+            >
+              {/* Browser control bars */}
+              <div className="h-11 border-b border-border/60 flex items-center px-4 gap-2 bg-muted/20">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-amber-500/60" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/60" />
+                </div>
+                <div className="mx-auto text-[10px] font-semibold text-muted-foreground tracking-wide font-mono bg-muted/30 dark:bg-muted/40 px-4 py-0.5 rounded-full border border-border/30">
+                  spendlens.com/dashboard
+                </div>
+                <div className="w-12 h-2" />
+              </div>
+
+              {/* Console Dashboard body */}
+              <div className="p-6 flex flex-col gap-5.5">
+                
+                {/* Real-time spend indicators */}
+                <div className="flex justify-between items-end border-b border-border/30 pb-4">
+                  <div>
+                    <div className="text-[10px] uppercase font-bold text-muted-foreground tracking-wider mb-1">Corporate Stack Burn</div>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-foreground flex items-center gap-2">
+                      <span>$1,240</span>
+                      <span className="text-xs font-semibold text-muted-foreground">/mo current</span>
                     </div>
-                    <div className="text-success font-bold text-base sm:text-lg">-$960</div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-[10px] uppercase font-bold text-success tracking-wider mb-1">Optimized Path</div>
+                    <div className="text-2xl sm:text-3xl font-extrabold text-success flex items-center justify-end gap-1.5">
+                      <span>$420</span>
+                      <span className="text-xs font-semibold text-success/80">/mo</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Column 2: 4K Image Spend Visualization */}
-              <div className="lg:col-span-2 w-full flex justify-center items-center">
-                <motion.div 
-                  whileHover={{ scale: 1.03 }}
-                  className="relative w-full max-w-sm rounded-2xl border border-border/60 overflow-hidden shadow-xl bg-card animate-float pointer-events-auto"
-                >
-                  <img 
-                    src="/hero_visualization.png" 
-                    alt="AI Spend Analytics Dashboard" 
-                    className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent pointer-events-none" />
-                </motion.div>
+                {/* Spectacular vector animated spline spend graph */}
+                <div className="relative h-44 w-full bg-muted/10 dark:bg-muted/15 rounded-2xl border border-border/40 overflow-hidden p-4 flex flex-col justify-between shadow-inner">
+                  
+                  {/* Grid Lines */}
+                  <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-[0.06] dark:opacity-[0.09] p-4">
+                    <div className="w-full h-[1px] bg-foreground" />
+                    <div className="w-full h-[1px] bg-foreground" />
+                    <div className="w-full h-[1px] bg-foreground" />
+                    <div className="w-full h-[1px] bg-foreground" />
+                  </div>
+                  <div className="absolute inset-0 flex justify-between pointer-events-none opacity-[0.06] dark:opacity-[0.09] p-4">
+                    <div className="w-[1px] h-full bg-foreground" />
+                    <div className="w-[1px] h-full bg-foreground" />
+                    <div className="w-[1px] h-full bg-foreground" />
+                    <div className="w-[1px] h-full bg-foreground" />
+                  </div>
+
+                  {/* Morphing Path SVG curves */}
+                  <svg className="absolute inset-0 w-full h-full p-4 pointer-events-none overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="curveGradient" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#3b82f6" />
+                        <stop offset="50%" stopColor="#8b5cf6" />
+                        <stop offset="100%" stopColor="#ec4899" />
+                      </linearGradient>
+                      <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#8b5cf6" stopOpacity="0.16" />
+                        <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    
+                    {/* Pulsing fill area */}
+                    <motion.path
+                      initial={{ d: "M 0 30 Q 25 35 50 40 T 100 45 L 100 100 L 0 100 Z" }}
+                      animate={{ 
+                        d: [
+                          "M 0 30 Q 25 45 50 35 T 100 40 L 100 100 L 0 100 Z", 
+                          "M 0 25 Q 30 20 60 70 T 100 80 L 100 100 L 0 100 Z", 
+                          "M 0 28 Q 28 32 55 75 T 100 82 L 100 100 L 0 100 Z"
+                        ]
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut"
+                      }}
+                      fill="url(#areaGradient)"
+                    />
+
+                    {/* Smooth Neon Spline Line */}
+                    <motion.path
+                      initial={{ d: "M 0 30 Q 25 35 50 40 T 100 45" }}
+                      animate={{ 
+                        d: [
+                          "M 0 30 Q 25 45 50 35 T 100 40", 
+                          "M 0 25 Q 30 20 60 70 T 100 80",
+                          "M 0 28 Q 28 32 55 75 T 100 82"
+                        ]
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut"
+                      }}
+                      fill="none"
+                      stroke="url(#curveGradient)"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                    />
+
+                    {/* Drifting marker point */}
+                    <motion.circle
+                      animate={{
+                        cy: [40, 80, 82],
+                        scale: [1, 1.25, 1]
+                      }}
+                      transition={{
+                        duration: 8,
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        ease: "easeInOut"
+                      }}
+                      cx="100"
+                      cy="82"
+                      r="4"
+                      fill="#ec4899"
+                      className="filter drop-shadow-[0_0_8px_#ec4899]"
+                    />
+                  </svg>
+
+                  {/* Header overlay markers */}
+                  <div className="flex justify-between items-start z-10 w-full">
+                    <div className="px-2.5 py-0.5 rounded bg-card/60 backdrop-blur-sm text-[8px] font-bold text-muted-foreground border border-border/30">Baseline Spend</div>
+                    <div className="px-2.5 py-0.5 rounded bg-success/15 backdrop-blur-sm text-[8px] font-bold text-success border border-success/35">CFO Optimized</div>
+                  </div>
+
+                  {/* Bottom overlay labels */}
+                  <div className="flex justify-between items-end z-10 w-full mt-auto">
+                    <div className="text-[10px] font-extrabold text-foreground/80 font-mono">$1,240/mo</div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-success animate-ping" />
+                      <span className="text-[10px] font-extrabold text-success font-mono">-$820 saved (-66%)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sub-grid Metrics metrics */}
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="p-3 rounded-2xl bg-muted/10 dark:bg-muted/15 border border-border/40 text-center hover:bg-muted/20 dark:hover:bg-muted/25 transition-all">
+                    <div className="text-[8px] uppercase font-bold text-muted-foreground tracking-wider mb-0.5">Total Savings</div>
+                    <div className="text-base font-extrabold text-foreground font-mono">66%</div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-muted/10 dark:bg-muted/15 border border-border/40 text-center hover:bg-muted/20 dark:hover:bg-muted/25 transition-all">
+                    <div className="text-[8px] uppercase font-bold text-muted-foreground tracking-wider mb-0.5">Annual Boost</div>
+                    <div className="text-base font-extrabold text-success font-mono">+$9.8K</div>
+                  </div>
+                  <div className="p-3 rounded-2xl bg-muted/10 dark:bg-muted/15 border border-border/40 text-center hover:bg-muted/20 dark:hover:bg-muted/25 transition-all">
+                    <div className="text-[8px] uppercase font-bold text-muted-foreground tracking-wider mb-0.5">Runway Ext.</div>
+                    <div className="text-base font-extrabold text-primary font-mono">+4.2mo</div>
+                  </div>
+                </div>
+
+                {/* Optimizations detail list */}
+                <div className="flex flex-col gap-2.5">
+                  <div className="flex items-center justify-between p-3.5 rounded-xl border border-border/40 bg-muted/10 text-xs hover:bg-muted/20 transition-all">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-6 h-6 rounded-lg bg-red-500/10 flex items-center justify-center text-red-500">
+                        <TrendingDown className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-semibold text-foreground">Redundant IDE seats optimized</span>
+                    </div>
+                    <span className="text-success font-bold font-mono">-$100/mo</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3.5 rounded-xl border border-border/40 bg-muted/10 text-xs hover:bg-muted/20 transition-all">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-6 h-6 rounded-lg bg-violet-500/10 flex items-center justify-center text-violet-400">
+                        <Zap className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-semibold text-foreground">Claude Prompt Caching configured</span>
+                      <span className="text-[9px] uppercase px-1.5 py-0.5 bg-violet-500/15 text-violet-400 font-bold tracking-wider rounded ml-1 border border-violet-500/20">API</span>
+                    </div>
+                    <span className="text-success font-bold font-mono">-$340/mo</span>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3.5 rounded-xl border border-border/40 bg-muted/10 text-xs hover:bg-muted/20 transition-all">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-6 h-6 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+                        <Sparkles className="w-3.5 h-3.5" />
+                      </div>
+                      <span className="font-semibold text-foreground">Partner Credex discounts enabled</span>
+                    </div>
+                    <span className="text-success font-bold font-mono">-$380/mo</span>
+                  </div>
+                </div>
+
+                {/* Big counting animated total annual projected savings display */}
+                <div className="mt-2 border-t border-border/30 pt-4 text-center">
+                  <div className="text-[9px] uppercase font-bold text-muted-foreground tracking-widest mb-1.5">Projected Annual Savings</div>
+                  <div className="text-4xl sm:text-5xl font-extrabold tracking-tight text-foreground font-mono flex justify-center items-center">
+                    <span>$</span>
+                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground via-foreground/90 to-foreground/75">{savingsCount.toLocaleString()}</span>
+                  </div>
+                </div>
+
               </div>
-            </div>
+            </motion.div>
           </div>
-        </motion.div>
+
+        </div>
       </section>
 
       {/* Infinite Integrations Strip */}
