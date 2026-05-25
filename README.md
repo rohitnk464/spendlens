@@ -63,6 +63,9 @@ We structured the `/audit/[id]` dashboard using Next.js 15 Server Components. Th
 ### 4. Row Level Security (RLS) & Secure Write APIs
 To prevent malicious script injections and data leaks, we enabled strict RLS policies on our Supabase PostgreSQL instance. Browser clients have zero direct read/write access. All database insertions and updates happen securely through server-side Next.js API Routes using the `SUPABASE_SERVICE_ROLE_KEY`.
 
+### 5. In-Memory Endpoint Rate Limiting & Honeypot Fields (Basic Abuse Protection)
+Instead of forcing users to solve clunky, visual Captchas (such as hCaptcha or reCAPTCHA), we implemented a dual-defense system consisting of a hidden client-side honeypot field and server-side in-memory IP rate limiting on lead capture mutations. This provides robust protection against automated email-spam scripts while maintaining a frictionless, visual-pure dark mode layout.
+
 ---
 
 ## 📖 Strategy & Economics Documentation
