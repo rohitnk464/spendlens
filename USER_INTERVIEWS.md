@@ -48,8 +48,8 @@ Rohan's interview proved that agencies running heavy programmatic automation are
 
 ---
 
-### Interview 3: Ronik Bajakke (Associate Software Engineer at TEmpower)
-* **Profile:** Ronik Bajakke is a full-stack engineer at **TEmpower**, an enterprise software solutions provider.
+### Interview 3: Ronik Bajakke (Associate Software Engineer at Empower)
+* **Profile:** Ronik Bajakke is a full-stack engineer at **Empower**, an enterprise software solutions provider.
 * **Current AI Stack Monthly Spend:** ~$160/month (paying for premium developer IDE seats and code-generation models).
 
 #### 1. What are your biggest pain points when managing your team's software spend?
