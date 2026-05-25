@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { createServerClient } from "@/lib/supabase-server";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import { AuditResult } from "@/types";
 import ResultsHero from "@/components/audit/ResultsHero";
 import AISummary from "@/components/audit/AISummary";
@@ -21,8 +21,7 @@ export async function generateMetadata(props: { params: Promise<{ id: string }> 
     return { title: "Audit Not Found" };
   }
 
-  const supabase = await createServerClient();
-  const { data } = await supabase.from("audits").select("results").eq("id", id).single();
+  const { data } = await supabaseAdmin.from("audits").select("results").eq("id", id).single();
   
   if (!data) return { title: "Audit Not Found" };
 
@@ -66,9 +65,7 @@ export default async function AuditResultsPage(props: { params: Promise<{ id: st
     notFound();
   }
 
-  const supabase = await createServerClient();
-  
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from("audits")
     .select("*")
     .eq("id", id)

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@/lib/supabase-server";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
@@ -10,10 +10,8 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const supabase = await createServerClient();
-
     // 1. Fetch audit data
-    const { data: audit, error: fetchError } = await supabase
+    const { data: audit, error: fetchError } = await supabaseAdmin
       .from("audits")
       .select("*")
       .eq("id", id)
@@ -82,7 +80,7 @@ Rules:
 
     // 5. Save the summary back to Supabase
     try {
-      await supabase
+      await supabaseAdmin
         .from("audits")
         .update({ ai_summary: summaryText })
         .eq("id", id);

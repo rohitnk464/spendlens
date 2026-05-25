@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { runAudit } from "@/lib/audit-engine";
 import { AuditInput } from "@/types";
-import { createServerClient } from "@/lib/supabase-server";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export async function POST(req: Request) {
   try {
@@ -20,9 +20,7 @@ export async function POST(req: Request) {
 
     // 3. Save to Supabase
     try {
-      const supabase = await createServerClient();
-      
-      const { error } = await supabase.from("audits").insert({
+      const { error } = await supabaseAdmin.from("audits").insert({
         id: auditResult.id,
         tools: auditResult.tools,
         team_size: auditResult.teamSize,

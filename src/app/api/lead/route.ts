@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createServerClient } from "@/lib/supabase-server";
+import { supabaseAdmin } from "@/lib/supabase-admin";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -40,12 +40,10 @@ export async function POST(req: Request) {
       );
     }
 
-    const supabase = await createServerClient();
-
     // 3. Save lead to Supabase
     // We don't block the email if this fails, but we log it
     try {
-      await supabase.from("leads").insert({
+      await supabaseAdmin.from("leads").insert({
         email,
         audit_id: auditId,
         savings_tier: savingsTier || 'unknown',
