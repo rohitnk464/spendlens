@@ -187,7 +187,7 @@ export default function HomePage() {
           </div>
         </motion.div>
 
-        {/* Dynamic Mockup Graphic with live counting numbers */}
+        {/* Dynamic Mockup Graphic with live counting numbers & 4K Visualization */}
         <motion.div
           initial={{ opacity: 0, y: 80 }}
           animate={{ opacity: 1, y: 0 }}
@@ -202,34 +202,52 @@ export default function HomePage() {
               <div className="mx-auto text-xs font-semibold text-muted-foreground tracking-wide font-mono">spendlens.com/audit/results</div>
             </div>
             
-            <div className="p-8 sm:p-14 flex flex-col items-center">
-              <div className="text-muted-foreground font-semibold mb-2 uppercase tracking-widest text-xs">Projected Annual Savings</div>
-              <motion.div className="text-6xl sm:text-[5.5rem] font-bold tracking-tight text-foreground mb-10 flex items-center font-mono">
-                $<span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">{savingsCount.toLocaleString()}</span>
-              </motion.div>
-              
-              <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-5.5 rounded-2xl bg-muted/20 border border-border/60 flex justify-between items-center shadow-inner hover:scale-[1.02] transition-transform">
-                  <div className="flex items-center gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-xl">🤖</div>
-                    <div className="text-left">
-                      <div className="font-bold text-foreground text-sm sm:text-base">ChatGPT Enterprise</div>
-                      <div className="text-xs text-muted-foreground font-medium mt-0.5">Switch to ChatGPT Team</div>
+            <div className="p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-5 gap-10 items-center">
+              {/* Column 1: Savings Counter & Recommendation Cards */}
+              <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left">
+                <div className="text-muted-foreground font-semibold mb-2 uppercase tracking-widest text-xs">Projected Annual Savings</div>
+                <motion.div className="text-6xl sm:text-[4.8rem] font-bold tracking-tight text-foreground mb-8 flex items-center font-mono">
+                  $<span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">{savingsCount.toLocaleString()}</span>
+                </motion.div>
+                
+                <div className="w-full grid grid-cols-1 gap-4">
+                  <div className="p-5 rounded-2xl bg-muted/20 border border-border/60 flex justify-between items-center shadow-inner hover:scale-[1.02] transition-transform">
+                    <div className="flex items-center gap-4">
+                      <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-xl">🤖</div>
+                      <div className="text-left">
+                        <div className="font-bold text-foreground text-sm sm:text-base">ChatGPT Enterprise</div>
+                        <div className="text-xs text-muted-foreground font-medium mt-0.5">Switch to ChatGPT Team</div>
+                      </div>
                     </div>
+                    <div className="text-success font-bold text-base sm:text-lg">-$1,470</div>
                   </div>
-                  <div className="text-success font-bold text-base sm:text-lg">-$1,470</div>
-                </div>
 
-                <div className="p-5.5 rounded-2xl bg-muted/20 border border-border/60 flex justify-between items-center shadow-inner hover:scale-[1.02] transition-transform">
-                  <div className="flex items-center gap-4">
-                    <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-xl">⚡</div>
-                    <div className="text-left">
-                      <div className="font-bold text-foreground text-sm sm:text-base">Cursor Business</div>
-                      <div className="text-xs text-muted-foreground font-medium mt-0.5">Downgrade to Cursor Pro</div>
+                  <div className="p-5 rounded-2xl bg-muted/20 border border-border/60 flex justify-between items-center shadow-inner hover:scale-[1.02] transition-transform">
+                    <div className="flex items-center gap-4">
+                      <div className="w-11 h-11 rounded-xl bg-accent/10 flex items-center justify-center text-xl">⚡</div>
+                      <div className="text-left">
+                        <div className="font-bold text-foreground text-sm sm:text-base">Cursor Business</div>
+                        <div className="text-xs text-muted-foreground font-medium mt-0.5">Downgrade to Cursor Pro</div>
+                      </div>
                     </div>
+                    <div className="text-success font-bold text-base sm:text-lg">-$960</div>
                   </div>
-                  <div className="text-success font-bold text-base sm:text-lg">-$960</div>
                 </div>
+              </div>
+
+              {/* Column 2: 4K Image Spend Visualization */}
+              <div className="lg:col-span-2 w-full flex justify-center items-center">
+                <motion.div 
+                  whileHover={{ scale: 1.03 }}
+                  className="relative w-full max-w-sm rounded-2xl border border-border/60 overflow-hidden shadow-xl bg-card animate-float pointer-events-auto"
+                >
+                  <img 
+                    src="/hero_visualization.png" 
+                    alt="AI Spend Analytics Dashboard" 
+                    className="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent pointer-events-none" />
+                </motion.div>
               </div>
             </div>
           </div>
