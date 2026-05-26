@@ -19,6 +19,7 @@ import {
   Quote,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { AnnouncementBar } from "@/components/AnnouncementBar";
 
 const TOOLS = [
   { name: "Cursor", logo: "⚡" },
@@ -123,6 +124,7 @@ export default function HomePage() {
 
   return (
     <main className="flex flex-col min-h-screen bg-background text-foreground overflow-hidden selection:bg-primary/30 relative">
+      <AnnouncementBar />
       
       {/* Premium Ambient Background Gradients */}
       <div className="fixed inset-0 grid-pattern opacity-[0.14] z-0 pointer-events-none" />

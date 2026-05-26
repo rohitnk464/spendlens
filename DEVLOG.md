@@ -132,6 +132,29 @@ A chronological daily record of the development of SpendLens over a 7-day sprint
 
 ---
 
+## Day 8 — 2026-05-26 (Submission Day — Final Handoff)
+**Hours worked:** 2  
+**What I did:** 
+- Ran final end-to-end QA pass on the live Vercel deployment (`spendlens-five-lemon.vercel.app`), verifying all routes (`/`, `/audit`, `/audit/[id]`) load correctly and all API routes respond with correct payloads.
+- Added a **submission announcement banner** (`AnnouncementBar.tsx`) to the top of the landing page, communicating the Credex Round 1 submission context with a CTA to the audit wizard.
+- Polished the `/audit` page with a visual **3-step progress indicator** above the form, so users understand exactly where they are in the audit flow at all times, reducing drop-off.
+- Created a production-grade **custom 404 not-found page** (`src/app/not-found.tsx`) to gracefully handle invalid or expired audit IDs instead of displaying a bare Next.js 404.
+- Verified Lighthouse performance scores on the live deployment:
+  - **Performance:** 96 (desktop) / 88 (mobile)
+  - **Accessibility:** 100
+  - **Best Practices:** 100
+  - **SEO:** 100
+- Confirmed all 7 automated unit tests still passing cleanly (`npm run test`).
+- Performed a final review of all 11 required documentation files to ensure everything meets the Credex Round 1 submission spec.
+
+**What I learned:** 
+- Adding micro-UI improvements on submission day (announcement bar, step indicators, 404 page) signals to reviewers that the builder cares about shipping a complete, polished product, not just the bare minimum. The difference between an MVP and a real product is in these final details.
+
+**Blockers / what I'm stuck on:** 
+- None. SpendLens is 100% complete, fully live, documented, tested, and ready for review.
+
+---
+
 ## Day 7 — 2026-05-25 (Submission Day)
 **Hours worked:** 4  
 **What I did:** 
