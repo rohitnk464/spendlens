@@ -49,9 +49,12 @@ export function runAudit(input: AuditInput): AuditResult {
 
     // === Check 1: Right plan tier for team size? ===
     if (currentPlanDetails.isEnterprise && entry.seats < (currentPlanDetails.minRecommendedSeats || 20)) {
-      // Find a per-user plan, or fallback to any non-enterprise plan if none exist (e.g. ChatGPT Plus)
-      const targetPlan = plans.find((p) => p.isPerUser && !p.isEnterprise && !p.minRecommendedSeats) || 
-                         plans.find((p) => !p.isEnterprise && !p.minRecommendedSeats);
+      // Find a non-enterprise plan that supports the current team size.
+      // Sort to prefer paid plans over free plans for enterprise downgrades.
+      const validPlans = plans
+        .filter((p) => !p.isEnterprise && p.pricePerUserMonth < currentPlanDetails.pricePerUserMonth && (!p.minRecommendedSeats || p.minRecommendedSeats <= entry.seats))
+        .sort((a, b) => b.pricePerUserMonth - a.pricePerUserMonth);
+      const targetPlan = validPlans[0];
       if (targetPlan) {
         recommendation = "downgrade";
         recommendedPlan = targetPlan.id;
@@ -66,7 +69,7 @@ export function runAudit(input: AuditInput): AuditResult {
       entry.seats <= 2 &&
       currentPlanDetails.minRecommendedSeats
     ) {
-      const targetPlan = plans.find((p) => !p.minRecommendedSeats && !p.isEnterprise && p.pricePerUserMonth < currentPlanDetails.pricePerUserMonth);
+      const targetPlan = plans.find((p) => p.isPerUser && !p.minRecommendedSeats && !p.isEnterprise && p.pricePerUserMonth < currentPlanDetails.pricePerUserMonth);
       if (targetPlan) {
         recommendation = "downgrade";
         recommendedPlan = targetPlan.id;
@@ -81,7 +84,7 @@ export function runAudit(input: AuditInput): AuditResult {
     if (recommendation === "keep" && currentPlanDetails.isApi && entry.monthlySpend > 100) {
       recommendation = "optimize";
       recommendedAction = "Enable Batch API & Prompt Caching";
-      monthlySavings = Math.round(entry.monthlySpend * 0.4); // Conservative 40% discount estimate
+      monthlySavings = Math.round(entry.monthlySpend * 0.5); // Conservative 50% discount estimate
       newMonthlyCost = entry.monthlySpend - monthlySavings;
       reasoning = `At $${entry.monthlySpend}/mo in ${displayName} spend, enabling Batch API (50% discount) for async workloads and Prompt Caching (up to 90% savings on repeated inputs) could save $${monthlySavings}+/mo.`;
     }

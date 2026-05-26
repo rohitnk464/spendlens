@@ -67,7 +67,7 @@ describe("Audit Engine", () => {
 
     expect(toolResult.recommendation).toBe("keep");
     expect(toolResult.monthlySavings).toBe(0);
-    expect(toolResult.reasoning).toContain("optimal plan");
+    expect(toolResult.reasoning).toContain("optimally configured");
   });
 
   test("4. Coding use case suggests cheaper alternative (Copilot vs Cursor)", () => {
