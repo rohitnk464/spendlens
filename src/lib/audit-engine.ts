@@ -49,14 +49,16 @@ export function runAudit(input: AuditInput): AuditResult {
 
     // === Check 1: Right plan tier for team size? ===
     if (currentPlanDetails.isEnterprise && entry.seats < (currentPlanDetails.minRecommendedSeats || 20)) {
-      recommendation = "downgrade";
-      const targetPlan = plans.find((p) => p.isPerUser && !p.isEnterprise && !p.minRecommendedSeats);
+      // Find a per-user plan, or fallback to any non-enterprise plan if none exist (e.g. ChatGPT Plus)
+      const targetPlan = plans.find((p) => p.isPerUser && !p.isEnterprise && !p.minRecommendedSeats) || 
+                         plans.find((p) => !p.isEnterprise && !p.minRecommendedSeats);
       if (targetPlan) {
+        recommendation = "downgrade";
         recommendedPlan = targetPlan.id;
-        newMonthlyCost = targetPlan.pricePerUserMonth * entry.seats;
+        newMonthlyCost = (targetPlan.isPerUser ? targetPlan.pricePerUserMonth * entry.seats : targetPlan.pricePerUserMonth);
         monthlySavings = currentCost - newMonthlyCost;
         recommendedAction = `Downgrade from ${currentPlanDetails.name} to ${targetPlan.name}`;
-        reasoning = `Your team of ${entry.seats} on ${displayName} ${currentPlanDetails.name} ($${currentPlanDetails.pricePerUserMonth}/user) could use the ${targetPlan.name} plan ($${targetPlan.pricePerUserMonth}/user) and save $${Math.round(monthlySavings)}/mo — enterprise features aren't needed at this size.`;
+        reasoning = `Your team of ${entry.seats} on ${displayName} ${currentPlanDetails.name} ($${currentPlanDetails.pricePerUserMonth}/user) could use the ${targetPlan.name} plan ($${targetPlan.pricePerUserMonth}${targetPlan.isPerUser ? '/user' : '/mo'}) and save $${Math.round(monthlySavings)}/mo — enterprise features aren't needed at this size.`;
       }
     } else if (
       currentPlanDetails.isPerUser &&
@@ -64,14 +66,14 @@ export function runAudit(input: AuditInput): AuditResult {
       entry.seats <= 2 &&
       currentPlanDetails.minRecommendedSeats
     ) {
-      recommendation = "downgrade";
-      const targetPlan = plans.find((p) => p.isPerUser && !p.minRecommendedSeats && !p.isEnterprise && p.pricePerUserMonth < currentPlanDetails.pricePerUserMonth);
+      const targetPlan = plans.find((p) => !p.minRecommendedSeats && !p.isEnterprise && p.pricePerUserMonth < currentPlanDetails.pricePerUserMonth);
       if (targetPlan) {
+        recommendation = "downgrade";
         recommendedPlan = targetPlan.id;
-        newMonthlyCost = targetPlan.pricePerUserMonth * entry.seats;
+        newMonthlyCost = (targetPlan.isPerUser ? targetPlan.pricePerUserMonth * entry.seats : targetPlan.pricePerUserMonth);
         monthlySavings = currentCost - newMonthlyCost;
         recommendedAction = `Downgrade to ${targetPlan.name} plan`;
-        reasoning = `Your team of ${entry.seats} on ${displayName} ${currentPlanDetails.name} ($${currentPlanDetails.pricePerUserMonth}/user) could use individual ${targetPlan.name} plans ($${targetPlan.pricePerUserMonth}/user) and save $${Math.round(monthlySavings)}/mo — team admin features aren't needed at this size.`;
+        reasoning = `Your team of ${entry.seats} on ${displayName} ${currentPlanDetails.name} ($${currentPlanDetails.pricePerUserMonth}/user) could use ${targetPlan.name} plans ($${targetPlan.pricePerUserMonth}${targetPlan.isPerUser ? '/user' : '/mo'}) and save $${Math.round(monthlySavings)}/mo — team admin features aren't needed at this size.`;
       }
     }
 
