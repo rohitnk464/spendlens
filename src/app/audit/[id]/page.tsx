@@ -115,23 +115,31 @@ export default async function AuditResultsPage(props: { params: Promise<{ id: st
         <LeadCaptureForm auditId={id} savingsTier={results.savingsTier} />
       </div>
 
-      {/* CTA Footer for Credex */}
-      {results.totalCredexSavings && results.totalCredexSavings > 0 && (
-        <div className="mt-12 p-8 glass rounded-2xl border-primary/30 bg-primary/5 text-center animate-slide-up" style={{ animationDelay: "0.3s" }}>
-          <h3 className="text-xl font-bold mb-2">Want to save an additional ${Math.floor(results.totalCredexSavings)}/mo?</h3>
-          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-            Credex provides discounted AI infrastructure credits for tools like Anthropic, OpenAI, and Gemini. Get retail access at wholesale prices.
-          </p>
-          <a 
-            href="https://credex.rocks" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25"
-          >
-            Claim Credex Credits
-          </a>
+      {/* CTA Footer for Credex — always shown */}
+      <div className="mt-12 p-8 glass rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5 text-center animate-slide-up" style={{ animationDelay: "0.4s" }}>
+        <div className="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+          <span className="text-2xl">💡</span>
         </div>
-      )}
+        <h3 className="text-xl font-bold mb-2">
+          {results.totalCredexSavings > 0
+            ? `Save an additional $${Math.floor(results.totalCredexSavings)}/mo with Credex`
+            : "Maximize Your Savings with Credex Credits"}
+        </h3>
+        <p className="text-muted-foreground mb-6 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
+          Credex provides discounted AI infrastructure credits for tools like Anthropic API, OpenAI API, Cursor, Claude Pro, and more — at wholesale prices. Purchase credit pools and cut your AI bills by an additional 15–30%.
+        </p>
+        <a
+          href="https://credex.rocks"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5 active:translate-y-0"
+        >
+          Claim Credex Credits
+          <span>→</span>
+        </a>
+        <p className="mt-4 text-xs text-muted-foreground">Used by 500+ startups to cut AI infrastructure costs</p>
+      </div>
     </main>
   );
 }
+

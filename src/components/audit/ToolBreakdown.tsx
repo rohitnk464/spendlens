@@ -1,7 +1,7 @@
 import { ToolAuditResult } from "@/types";
 import { getToolDisplayName, getToolEmoji } from "@/lib/pricing-data";
 import { formatCurrency } from "@/lib/utils";
-import { ArrowRight, CheckCircle2, AlertCircle, ArrowDownCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, AlertCircle, ArrowDownCircle, ExternalLink } from "lucide-react";
 
 export default function ToolBreakdown({ tools }: { tools: ToolAuditResult[] }) {
   const getIcon = (recommendation: string) => {
@@ -100,6 +100,31 @@ export default function ToolBreakdown({ tools }: { tools: ToolAuditResult[] }) {
                   <div className="text-sm text-muted-foreground leading-relaxed pt-3 border-t border-border/50">
                     <span className="font-semibold text-foreground mr-1">Reasoning:</span>
                     {result.recommendedAction}
+                  </div>
+
+                  {/* Action button for optimize/switch/downgrade */}
+                  <div className="pt-3">
+                    {result.recommendation === "optimize" ? (
+                      <a
+                        href="https://credex.rocks"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all hover:shadow-lg hover:shadow-blue-500/20 hover:-translate-y-0.5 active:translate-y-0"
+                      >
+                        Optimize via Credex Credits
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    ) : result.recommendation === "switch" || result.recommendation === "downgrade" ? (
+                      <a
+                        href="https://credex.rocks"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-primary/10 hover:bg-primary/20 text-primary text-sm font-semibold border border-primary/20 hover:border-primary/40 transition-all hover:-translate-y-0.5 active:translate-y-0"
+                      >
+                        Save more with Credex Credits
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               )}
