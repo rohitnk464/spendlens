@@ -94,7 +94,7 @@ export async function POST(req: Request) {
           const saving = `$${Math.floor(t.monthlySavings)}/mo`;
           return `
             <tr style="border-bottom: 1px solid #f0f0f0;">
-              <td style="padding: 10px 8px; font-weight: 600; color: #111;">${t.toolDisplayName}</td>
+              <td style="padding: 10px 8px; font-weight: 600; color: #111;">${t.toolDisplayName || t.tool}</td>
               <td style="padding: 10px 8px; color: #666;">${action}</td>
               <td style="padding: 10px 8px; color: #16a34a; font-weight: 700; text-align: right;">${saving}</td>
             </tr>`;

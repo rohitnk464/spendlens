@@ -787,7 +787,7 @@ export default function HomePage() {
             Ready to stop burning runway?
           </h2>
           <p className="text-muted-foreground max-w-md mx-auto text-base sm:text-lg mb-10 leading-relaxed font-light">
-            Audit your team's AI tool subscriptions and re-claim your software burn in 30 seconds.
+            Audit your team&apos;s AI tool subscriptions and re-claim your software burn in 30 seconds.
           </p>
           <Link
             href="/audit"
