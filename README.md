@@ -13,25 +13,25 @@ SpendLens is a blazing fast B2B micro-SaaS that instantly audits your entire AI 
 
 ### 1. The Landing Page
 A modern, glassmorphic marketing landing page presenting immediate value contract options and our 60-second audit promise.
-![SpendLens Landing Page](./public/screenshots/media__1779333948189.png)
+![SpendLens Landing Page](./public/screenshots/landing-page.png)
 
 ### 2. The 3-Step Spend Form
 An elegant, animated multi-step wizard that lets users configure their tools, seats, and use cases anonymously in under 30 seconds.
 | Step 1: Select AI Tools | Step 2: Configure Seats | Step 3: Choose Use Case |
 |---|---|---|
-| ![Step 1](./public/screenshots/media__1779334314264.png) | ![Step 2](./public/screenshots/media__1779334460988.png) | ![Step 3](./public/screenshots/media__1779334836712.png) |
+| ![Step 1](./public/screenshots/step1.png) | ![Step 2](./public/screenshots/step2.png) | ![Step 3](./public/screenshots/step3.png) |
 
 ### 3. Loading & Calculation
 Deterministic audit calculations run in milliseconds while a premium loading sequence runs.
-![Audit Loading](./public/screenshots/media__1779335276501.png)
+![Audit Loading](./public/screenshots/loading.png)
 
 ### 4. The Results Dashboard
 Instantly displays annualized savings, tool recommendations, and the AI "Fractional CFO" executive summary.
-![Results Dashboard](./public/screenshots/media__1779549420471.png)
+![Results Dashboard](./public/screenshots/results.png)
 
 ### 5. Lead Capture & Report Sharing
 Users can securely email the PDF results or copy a shareable link with one click.
-![Lead Capture & Sharing](./public/screenshots/media__1779637911355.png)
+![Lead Capture & Sharing](./public/screenshots/share.png)
 
 ---
 
