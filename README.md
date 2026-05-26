@@ -11,27 +11,25 @@ SpendLens is a blazing fast B2B micro-SaaS that instantly audits your entire AI 
 
 ## 📸 Product Visual Walkthrough
 
-### 1. The Landing Page
-A modern, glassmorphic marketing landing page presenting immediate value contract options and our 60-second audit promise.
+### 1. The Landing Page & Features
+A premium, dark-themed and glassmorphic marketing landing page presenting immediate value propositions and our 3-step audit engine workflow.
 ![SpendLens Landing Page](./public/screenshots/landing-page.png)
 
-### 2. The 3-Step Spend Form
+#### 3-Step Simple Audit Workflow
+![Audit Workflow](./public/screenshots/landing-steps.png)
+
+#### High Performance Features
+![Everything You Need](./public/screenshots/landing-features.png)
+
+### 2. Multi-Step Spend Wizard
 An elegant, animated multi-step wizard that lets users configure their tools, seats, and use cases anonymously in under 30 seconds.
-| Step 1: Select AI Tools | Step 2: Configure Seats | Step 3: Choose Use Case |
-|---|---|---|
-| ![Step 1](./public/screenshots/step1.png) | ![Step 2](./public/screenshots/step2.png) | ![Step 3](./public/screenshots/step3.png) |
+| Step 1: Select AI Tools | Step 2: Configure Plans |
+|---|---|
+| ![Step 1](./public/screenshots/step1.png) | ![Step 2](./public/screenshots/step2.png) |
 
-### 3. Loading & Calculation
-Deterministic audit calculations run in milliseconds while a premium loading sequence runs.
-![Audit Loading](./public/screenshots/loading.png)
-
-### 4. The Results Dashboard
-Instantly displays annualized savings, tool recommendations, and the AI "Fractional CFO" executive summary.
+### 3. The Results Dashboard
+Instantly displays annualized savings, detailed cost breakdowns, and the Google Gemini 2.5 Flash qualitative "Fractional CFO" advisory summary.
 ![Results Dashboard](./public/screenshots/results.png)
-
-### 5. Lead Capture & Report Sharing
-Users can securely email the PDF results or copy a shareable link with one click.
-![Lead Capture & Sharing](./public/screenshots/share.png)
 
 ---
 
