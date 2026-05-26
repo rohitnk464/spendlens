@@ -130,51 +130,6 @@ export default function HomePage() {
       <div className="fixed inset-0 grid-pattern opacity-[0.14] z-0 pointer-events-none" />
       <div className="absolute inset-x-0 top-0 h-[700px] bg-gradient-to-b from-transparent to-background pointer-events-none z-0" />
 
-      {/* 3D Floating Background Assets */}
-      <motion.div 
-        animate={{ 
-          y: [0, -18, 0],
-          rotate: [0, 8, 0]
-        }}
-        transition={{ 
-          duration: 9, 
-          repeat: Infinity,
-          ease: "easeInOut" 
-        }}
-        className="absolute left-[2%] sm:left-[4%] top-[15%] sm:top-[20%] w-20 sm:w-36 md:w-44 h-auto opacity-[0.14] dark:opacity-[0.24] pointer-events-none z-10 block"
-      >
-        <img src="/bg_trend.png" alt="Savings Trend 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
-      </motion.div>
-
-      <motion.div 
-        animate={{ 
-          y: [0, 20, 0],
-          rotate: [0, -10, 0]
-        }}
-        transition={{ 
-          duration: 10, 
-          repeat: Infinity,
-          ease: "easeInOut" 
-        }}
-        className="absolute right-[2%] sm:right-[4%] top-[20%] sm:top-[25%] w-20 sm:w-36 md:w-44 h-auto opacity-[0.14] dark:opacity-[0.24] pointer-events-none z-10 block"
-      >
-        <img src="/bg_shield.png" alt="Security Shield 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
-      </motion.div>
-
-      <motion.div 
-        animate={{ 
-          y: [0, -15, 0],
-          rotate: [0, 6, 0]
-        }}
-        transition={{ 
-          duration: 11, 
-          repeat: Infinity,
-          ease: "easeInOut" 
-        }}
-        className="absolute left-[2%] sm:left-[3%] top-[45%] sm:top-[50%] w-18 sm:w-32 md:w-40 h-auto opacity-[0.10] dark:opacity-[0.18] pointer-events-none z-10 block"
-      >
-        <img src="/bg_coins.png" alt="Reclaimed Spend Coins 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
-      </motion.div>
 
       {/* Premium Floating Navigation — sits below the announcement bar (top-9 = 36px) */}
       <nav className="fixed top-9 left-0 right-0 z-50 glass border-b border-border/40 backdrop-blur-md transition-[top] duration-300">
