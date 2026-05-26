@@ -12,6 +12,7 @@ export default function SpendForm() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [state, setState] = useState<FormState>({
     tools: [],
     teamSize: 1,
@@ -57,6 +58,7 @@ export default function SpendForm() {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       const response = await fetch("/api/audit", {
         method: "POST",
@@ -67,20 +69,20 @@ export default function SpendForm() {
           useCase: state.useCase,
         }),
       });
-      
+
       const result = await response.json();
-      
+
       if (result.success && result.data) {
         // Clear local storage after successful submission
         localStorage.removeItem("spendlens_form");
         router.push(`/audit/${result.data.id}`);
       } else {
-        alert("Failed to generate audit: " + (result.error || "Unknown error"));
+        setSubmitError(result.error || "Failed to generate audit. Please try again.");
         setIsSubmitting(false);
       }
     } catch (error) {
       console.error("Error submitting audit:", error);
-      alert("Failed to connect to the server. Please try again.");
+      setSubmitError("Failed to connect to the server. Please check your connection and try again.");
       setIsSubmitting(false);
     }
   };
@@ -112,12 +114,13 @@ export default function SpendForm() {
           <Step2Plans state={state} updateState={updateState} onNext={handleNext} onBack={handleBack} />
         )}
         {state.currentStep === 3 && (
-          <Step3Team 
-            state={state} 
-            updateState={updateState} 
-            onSubmit={handleSubmit} 
-            onBack={handleBack} 
-            isSubmitting={isSubmitting} 
+          <Step3Team
+            state={state}
+            updateState={updateState}
+            onSubmit={handleSubmit}
+            onBack={handleBack}
+            isSubmitting={isSubmitting}
+            submitError={submitError}
           />
         )}
       </div>
@@ -139,14 +142,19 @@ function Step1Tools({ state, updateState, onNext }: { state: FormState; updateSt
         tools: state.tools.filter((t: UserToolEntry) => t.tool !== toolId)
       });
     } else {
-      // Add with defaults
+      // Add with defaults — use first PAID plan (index 1), or first plan if only free exists
       const plans = getToolPlans(toolId);
-      const defaultPlan = plans[0]?.id || "";
-      
+      const defaultPlan = plans.find(p => p.pricePerUserMonth > 0) || plans[0];
+      const defaultPlanId = defaultPlan?.id || "";
+      const defaultSeats = 1;
+      const defaultSpend = defaultPlan?.isPerUser
+        ? (defaultPlan.pricePerUserMonth * defaultSeats)
+        : (defaultPlan?.pricePerUserMonth || 0);
+
       updateState({
         tools: [
-          ...state.tools, 
-          { tool: toolId, planId: defaultPlan, monthlySpend: 0, seats: 1 }
+          ...state.tools,
+          { tool: toolId, planId: defaultPlanId, monthlySpend: defaultSpend, seats: defaultSeats }
         ]
       });
     }
@@ -305,7 +313,7 @@ function Step2Plans({ state, updateState, onNext, onBack }: { state: FormState; 
 // ==========================================
 // STEP 3: Team Info
 // ==========================================
-function Step3Team({ state, updateState, onSubmit, onBack, isSubmitting }: { state: FormState; updateState: (updates: Partial<FormState>) => void; onSubmit: () => void; onBack: () => void; isSubmitting: boolean }) {
+function Step3Team({ state, updateState, onSubmit, onBack, isSubmitting, submitError }: { state: FormState; updateState: (updates: Partial<FormState>) => void; onSubmit: () => void; onBack: () => void; isSubmitting: boolean; submitError: string | null }) {
   const useCases: { id: UseCase; label: string; desc: string }[] = [
     { id: "coding", label: "Software Engineering", desc: "Writing, reviewing, and shipping code." },
     { id: "writing", label: "Content & Marketing", desc: "Copywriting, blogs, emails, and PR." },
@@ -356,19 +364,26 @@ function Step3Team({ state, updateState, onSubmit, onBack, isSubmitting }: { sta
           </div>
         </div>
         
-        <div className="flex justify-between items-center pt-4 border-t border-border/50">
-          <Button variant="outline" onClick={onBack} disabled={isSubmitting}>
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back
-          </Button>
-          <Button onClick={onSubmit} disabled={isSubmitting} size="lg" className="animate-pulse-glow">
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analyzing...
-              </>
-            ) : (
-              <>Run Audit Engine <ChevronRight className="w-4 h-4 ml-2" /></>
-            )}
-          </Button>
+        <div className="flex flex-col gap-4 pt-4 border-t border-border/50">
+          {/* Inline error message */}
+          {submitError && (
+            <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 text-sm font-medium flex items-start gap-2">
+              <span className="mt-0.5">⚠️</span>
+              <span>{submitError}</span>
+            </div>
+          )}
+          <div className="flex justify-between items-center">
+            <Button variant="outline" onClick={onBack} disabled={isSubmitting}>
+              <ArrowLeft className="w-4 h-4 mr-2" /> Back
+            </Button>
+            <Button onClick={onSubmit} disabled={isSubmitting} size="lg" className="animate-pulse-glow">
+              {isSubmitting ? (
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analyzing...</>
+              ) : (
+                <>Run Audit Engine <ChevronRight className="w-4 h-4 ml-2" /></>
+              )}
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
