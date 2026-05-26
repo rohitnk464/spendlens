@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://spendlens.com/sitemap.xml
