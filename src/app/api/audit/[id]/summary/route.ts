@@ -33,8 +33,9 @@ export async function POST(
     const auditData = typeof results === 'string' ? JSON.parse(results) : results;
     
     const toolFindings = auditData.tools.map((t: unknown) => {
-      const tool = t as { tool: string, currentMonthlyCost: number, recommendation: string, recommendedAction: string };
-      return `- ${tool.tool}: Currently paying $${tool.currentMonthlyCost}/mo. Recommendation: ${tool.recommendation}. ${tool.recommendedAction}`;
+      const tool = t as { tool: string, toolDisplayName?: string, currentMonthlyCost: number, recommendation: string, recommendedAction: string };
+      const name = tool.toolDisplayName || tool.tool;
+      return `- ${name}: Currently paying $${tool.currentMonthlyCost}/mo. Recommendation: ${tool.recommendation}. ${tool.recommendedAction}`;
     }).join("\n");
 
     const prompt = `You are an expert SaaS financial auditor and AI tool specialist.

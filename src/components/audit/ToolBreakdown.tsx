@@ -99,7 +99,7 @@ export default function ToolBreakdown({ tools }: { tools: ToolAuditResult[] }) {
                   
                   <div className="text-sm text-muted-foreground leading-relaxed pt-3 border-t border-border/50">
                     <span className="font-semibold text-foreground mr-1">Reasoning:</span>
-                    {result.recommendedAction}
+                    {result.reasoning}
                   </div>
 
                   {/* Action button for optimize/switch/downgrade */}
