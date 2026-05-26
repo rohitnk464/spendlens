@@ -176,8 +176,8 @@ export default function HomePage() {
         <img src="/bg_coins.png" alt="Reclaimed Spend Coins 3D Visual" className="w-full h-auto filter blur-[1px] dark:blur-0" />
       </motion.div>
 
-      {/* Premium Floating Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/40 backdrop-blur-md">
+      {/* Premium Floating Navigation — sits below the announcement bar (top-9 = 36px) */}
+      <nav className="fixed top-9 left-0 right-0 z-50 glass border-b border-border/40 backdrop-blur-md transition-[top] duration-300">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-accent flex items-center justify-center shadow-lg group-hover:scale-105 transition-all">
@@ -197,8 +197,8 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* Futuristic Hero Section Redesign */}
-      <section className="relative pt-32 pb-24 lg:pt-40 lg:pb-36 px-6 z-20 overflow-visible">
+      {/* Futuristic Hero Section Redesign — pt-44 clears both the banner (36px) + nav (64px) + breathing room */}
+      <section className="relative pt-44 pb-24 lg:pt-52 lg:pb-36 px-6 z-20 overflow-visible">
         {/* Soft atmospheric gradients */}
         <div className="absolute inset-0 grid-pattern opacity-[0.06] dark:opacity-[0.11] z-0 pointer-events-none" />
         <div className="absolute top-[10%] left-[20%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full bg-primary/10 dark:bg-primary/5 blur-[110px] pointer-events-none z-0" />
