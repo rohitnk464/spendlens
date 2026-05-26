@@ -273,8 +273,9 @@ function Step2Plans({ state, updateState, onNext, onBack }: { state: FormState; 
                       <input
                         type="number"
                         min="1"
+                        max="1000000"
                         value={entry.seats}
-                        onChange={(e) => updateTool(index, { seats: parseInt(e.target.value) || 1 })}
+                        onChange={(e) => updateTool(index, { seats: Math.min(parseInt(e.target.value) || 1, 1000000) })}
                         className="w-full h-10 px-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:outline-none"
                       />
                     </div>
@@ -286,8 +287,9 @@ function Step2Plans({ state, updateState, onNext, onBack }: { state: FormState; 
                     <input
                       type="number"
                       min="0"
+                      max="10000000"
                       value={entry.monthlySpend}
-                      onChange={(e) => updateTool(index, { monthlySpend: parseFloat(e.target.value) || 0 })}
+                      onChange={(e) => updateTool(index, { monthlySpend: Math.min(parseFloat(e.target.value) || 0, 10000000) })}
                       className="w-full h-10 px-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:outline-none"
                     />
                   </div>
@@ -336,8 +338,9 @@ function Step3Team({ state, updateState, onSubmit, onBack, isSubmitting, submitE
             <input
               type="number"
               min="1"
+              max="1000000"
               value={state.teamSize}
-              onChange={(e) => updateState({ teamSize: parseInt(e.target.value) || 1 })}
+              onChange={(e) => updateState({ teamSize: Math.min(parseInt(e.target.value) || 1, 1000000) })}
               className="w-full max-w-xs h-10 px-3 rounded-lg border border-border bg-background focus:ring-2 focus:ring-primary focus:outline-none"
             />
           </div>

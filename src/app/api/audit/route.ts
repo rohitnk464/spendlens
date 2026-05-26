@@ -22,12 +22,12 @@ export async function POST(req: Request) {
     const { error: dbError } = await supabaseAdmin.from("audits").insert({
       id: auditResult.id,
       tools: auditResult.tools,
-      team_size: auditResult.teamSize,
+      team_size: Math.min(auditResult.teamSize, 2000000000), // Clamp to prevent INT overflow
       use_case: auditResult.useCase,
       results: auditResult,
-      total_monthly_savings: auditResult.totalMonthlySavings,
-      total_annual_savings: auditResult.totalAnnualSavings,
-      total_credex_savings: auditResult.totalCredexSavings,
+      total_monthly_savings: Math.min(auditResult.totalMonthlySavings, 99999999.99), // Clamp to NUMERIC(10,2) max
+      total_annual_savings: Math.min(auditResult.totalAnnualSavings, 99999999.99), // Clamp to NUMERIC(10,2) max
+      total_credex_savings: Math.min(auditResult.totalCredexSavings, 99999999.99), // Clamp to NUMERIC(10,2) max
       savings_tier: auditResult.savingsTier,
       created_at: auditResult.createdAt,
     });
